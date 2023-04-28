@@ -12,10 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-/**
- *
- * @author ruben
- */
+
 public class RegistroSocioController {
 
     @FXML
