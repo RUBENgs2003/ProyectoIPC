@@ -4,70 +4,51 @@
  */
 package javafxmlapplication.controller;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 public class RegistroSocioController {
 
     @FXML
-    private TextField textFieldNombre;
+    private Label label_inicioSesion;
     @FXML
-    private TextField textFieldApellidos;
-    @FXML
-    private TextField textFieldTelefono;
-    @FXML
-    private TextField textFieldNickname;
-    @FXML
-    private Label labelErrorNombre;
-    @FXML
-    private Label labelErrorApellidos;
-    @FXML
-    private Label labelErrorTelefono;
-    @FXML
-    private Label labelErrorNickname;
-    @FXML
-    private Label labelErrorPassword;
-    @FXML
-    private ImageView imagenUsser;
-    @FXML
-    private Button buttonCambiarImagen;
-    @FXML
-    private TextField textFieldCredito;
-    @FXML
-    private Label labelErrorCredito;
-    @FXML
-    private PasswordField password;
-    @FXML
-    private TextField textFieldSCV;
-    @FXML
-    private Label labelErrorSVC;
-    @FXML
-    private Button buttonAceptar;
-    @FXML
-    private Button buttonCancelar;
-    @FXML
-    private Button buttonVerPassord;
+    private Button btn_registrarse;
 
     @FXML
-    private void accionCambiarImagen(ActionEvent event) {
+    private void registrarse(ActionEvent event) {
     }
 
     @FXML
-    private void accionAceptar(ActionEvent event) {
-    }
+    private void cambiarAInicioSesion() throws IOException {
+        Stage currentStage = (Stage) label_inicioSesion.getScene().getWindow();
+        currentStage.close();
 
-    @FXML
-    private void accionCancelar(ActionEvent event) {
-    }
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/inicioSesion.fxml"));
+        Parent root = miCargador.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Iniciar sesión - Club de tenis GreenBall");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(currentStage);
+        stage.getIcons().add(new Image("images/greenball.png"));
 
-    @FXML
-    private void accionVerPassord(ActionEvent event) {
+        stage.show();
+
     }
     
 }
