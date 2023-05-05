@@ -71,12 +71,6 @@ public class RegistroSocioController {
     @FXML
     private void registrarse(ActionEvent event) {
         
-        StringProperty telefono = input_telefono.textProperty();
-        StringProperty usuario = input_usuario.textProperty();
-        StringProperty password = input_password.textProperty();
-        StringProperty tarjeta = input_tarjeta.textProperty();
-        StringProperty svc = input_svc.textProperty();
-
         // Crear binding para el label de error del campo "nombre"
         BooleanBinding nombreValido = Bindings.createBooleanBinding(() -> {
             String nombre = input_nombre.getText();
@@ -93,14 +87,22 @@ public class RegistroSocioController {
         errorApellidos.visibleProperty().bind(apellidosValidos);
 
         // Crear binding para el label de error del campo "telefono"
-        errorTelefono.visibleProperty().bind(telefono.isEmpty());
+        BooleanBinding telefonoValido = Bindings.createBooleanBinding(() -> {
+            String telefono = input_telefono.getText();
+            return telefono.isEmpty();
+        }, input_telefono.textProperty());
+        errorTelefono.visibleProperty().bind(telefonoValido);
 
         // Crear binding para el label de error del campo "usuario"
-        errorUsuario.visibleProperty().bind(usuario.isEmpty());
+        BooleanBinding usuarioValido = Bindings.createBooleanBinding(() -> {
+            String usuario = input_usuario.getText();
+            return usuario.isEmpty();
+        }, input_usuario.textProperty());
+        errorUsuario.visibleProperty().bind(usuarioValido);
 
         // Crear binding para el label de error del campo "contrasena"
-        BooleanBinding miBooleanBinding = Bindings.createBooleanBinding(() -> input_password.getText().length() < 6, input_password.textProperty());
-        errorPassword.visibleProperty().bind(miBooleanBinding);
+        BooleanBinding passwordValido = Bindings.createBooleanBinding(() -> input_password.getText().length() < 6, input_password.textProperty());
+        errorPassword.visibleProperty().bind(passwordValido);
 
         // Crear bindings para el número de tarjeta de crédito y el código de seguridad SVC
         // Crear un binding para el número de tarjeta de crédito
@@ -124,9 +126,9 @@ public class RegistroSocioController {
         errorTarjeta.visibleProperty().bind(numeroValido);
         errorSVC.visibleProperty().bind(codigoValido);
         
-        System.out.println(numeroValido.and(codigoValido).and(nombreValido).toString());
-        btn_registrarse.disableProperty().bind(numeroValido.and(codigoValido));
-        
+        //si todos los campos son validos -> registrarse
+        //COMPLETAR
+                
     }
     
     @FXML
