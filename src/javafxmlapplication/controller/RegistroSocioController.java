@@ -5,14 +5,15 @@
 package javafxmlapplication.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import static javafx.application.Application.launch;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,9 +27,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Booking;
 
 public class RegistroSocioController {
-
+    
     @FXML
     private Label label_inicioSesion;
     @FXML
@@ -51,16 +53,87 @@ public class RegistroSocioController {
     private TextField input_svc;
     @FXML
     private ImageView imagenPerfil;
-
+    @FXML
+    private Label errorTelefono;
+    @FXML
+    private Label errorNombre;
+    @FXML
+    private Label errorApellidos;
+    @FXML
+    private Label errorUsuario;
+    @FXML
+    private Label errorPassword;
+    @FXML
+    private Label errorTarjeta;
+    @FXML
+    private Label errorSVC;
+    
     @FXML
     private void registrarse(ActionEvent event) {
-    }
+        
+        StringProperty telefono = input_telefono.textProperty();
+        StringProperty usuario = input_usuario.textProperty();
+        StringProperty password = input_password.textProperty();
+        StringProperty tarjeta = input_tarjeta.textProperty();
+        StringProperty svc = input_svc.textProperty();
 
+        // Crear binding para el label de error del campo "nombre"
+        BooleanBinding nombreValido = Bindings.createBooleanBinding(() -> {
+            String nombre = input_nombre.getText();
+            return nombre.isEmpty();
+        }, input_nombre.textProperty());
+        
+        errorNombre.visibleProperty().bind(nombreValido);
+
+        // Crear binding para el label de error del campo "apellidos"
+        BooleanBinding apellidosValidos = Bindings.createBooleanBinding(() -> {
+            String apellidos = input_apellidos.getText();
+            return apellidos.isEmpty();
+        }, input_apellidos.textProperty());
+        errorApellidos.visibleProperty().bind(apellidosValidos);
+
+        // Crear binding para el label de error del campo "telefono"
+        errorTelefono.visibleProperty().bind(telefono.isEmpty());
+
+        // Crear binding para el label de error del campo "usuario"
+        errorUsuario.visibleProperty().bind(usuario.isEmpty());
+
+        // Crear binding para el label de error del campo "contrasena"
+        BooleanBinding miBooleanBinding = Bindings.createBooleanBinding(() -> input_password.getText().length() < 6, input_password.textProperty());
+        errorPassword.visibleProperty().bind(miBooleanBinding);
+
+        // Crear bindings para el número de tarjeta de crédito y el código de seguridad SVC
+        // Crear un binding para el número de tarjeta de crédito
+        BooleanBinding numeroValido = Bindings.createBooleanBinding(() -> {
+            // Crear una expresión regular para validar el número de tarjeta de crédito
+            String regexNumero = "\\d{16}";
+            String numero = input_tarjeta.getText();
+            String codigo = input_svc.getText();
+            return !(numero.matches(regexNumero) || (numero.isEmpty() && codigo.isEmpty()));
+        }, input_tarjeta.textProperty());
+
+        // Crear un binding para el código de seguridad SVC
+        BooleanBinding codigoValido = Bindings.createBooleanBinding(() -> {
+            // Crear una expresión regular para validar el código de seguridad SVC
+            String regexSVC = "\\d{3}";
+            String codigo = input_svc.getText();
+            String numero = input_tarjeta.getText();
+            return !(numero.matches(regexSVC) || (numero.isEmpty() && codigo.isEmpty()));
+        }, input_svc.textProperty());
+        
+        errorTarjeta.visibleProperty().bind(numeroValido);
+        errorSVC.visibleProperty().bind(codigoValido);
+        
+        System.out.println(numeroValido.and(codigoValido).and(nombreValido).toString());
+        btn_registrarse.disableProperty().bind(numeroValido.and(codigoValido));
+        
+    }
+    
     @FXML
     private void cambiarAInicioSesion() throws IOException {
         Stage currentStage = (Stage) label_inicioSesion.getScene().getWindow();
         currentStage.close();
-
+        
         FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/inicioSesion.fxml"));
         Parent root = miCargador.load();
         Scene scene = new Scene(root);
@@ -70,28 +143,22 @@ public class RegistroSocioController {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-
+        
         stage.show();
-
+        
     }
-
+    
     @FXML
     private void cambiarImagen(ActionEvent event) throws IOException {
-        
-        /*  -------------------------- EN PRUEBAS  ----------------------------------- */
-        
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Abrir fichero");
-        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif"));
-        File selectedFile = fileChooser.showOpenDialog(
-                ((Node) event.getSource()).getScene().getWindow());
-        if (selectedFile != null) {
-            Path profileImageFolder = Paths.get("images");
-            Path destinationPath = profileImageFolder.resolve(selectedFile.toPath().getFileName());
-            Files.copy(selectedFile.toPath(), destinationPath);
-        }
+        //COMPLETAR
+    }
 
-        /*  -------------------------- EN PRUEBAS  ----------------------------------- */
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
         
     }
+    
 }
