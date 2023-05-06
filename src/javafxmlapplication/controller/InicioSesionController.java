@@ -55,12 +55,12 @@ public class InicioSesionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         //bindear boton inicio de sesion con los campos
         btn_iniciarSesion.disableProperty().bind(
                 Bindings.or(Bindings.isEmpty(input_usuario.textProperty()), Bindings.isEmpty(input_password.textProperty()))
         );
-        
+
     }
 
     @FXML
@@ -84,30 +84,29 @@ public class InicioSesionController implements Initializable {
 
     @FXML
     private void iniciarSesion(ActionEvent event) throws ClubDAOException, IOException {
-        
+
         //por defecto
         label_errorPassword.visibleProperty().setValue(false);
         label_errorUsuario.visibleProperty().setValue(false);
-        
+
         //obtenemos si el usuario existe
         Boolean exists = Club.getInstance().existsLogin(input_usuario.getText());
         System.out.println(exists);
         //si no existe mostramos el error
         label_errorUsuario.visibleProperty().setValue(!exists);
-        
-        
+
         //miramos si la contrasena es correcta
-        if(exists){
+        if (exists) {
             Member member = Club.getInstance().getMemberByCredentials(input_usuario.getText(), input_password.getText());
             //si no es correcta mostramos error
             label_errorPassword.visibleProperty().setValue(member == null);
-            
-            if(member != null){
+
+            if (member != null) {
                 System.out.println("Inicio de sesion correcto");
                 //COMPLETAR - INICIO DE SESION CORRECTO
             }
         }
-        
+
     }
 
 }

@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,11 +41,9 @@ import model.Club;
 import model.ClubDAOException;
 import model.Member;
 
-public class RegistroSocioController implements Initializable {
+public class ActualizarDatosController implements Initializable {
 
-    @FXML
     private Label label_inicioSesion;
-    @FXML
     private Button btn_registrarse;
     @FXML
     private TextField input_nombre;
@@ -80,12 +77,22 @@ public class RegistroSocioController implements Initializable {
     private Label errorTarjeta;
     @FXML
     private Label errorSVC;
+    @FXML
+    private Button btn_cambiarDatos;
+    @FXML
+    private Button btn_cancelar;
 
     /**
      * Initializes the controller class.
      */
     public void initialize(URL url, ResourceBundle rb) {
 
+        
+        //COMPLETAR - obtener member registrado y poner los valores de los campos
+        
+        //input_nombre.setText(member.getName());
+        //...
+        
         // Crear binding para el label de error del campo "nombre"
         BooleanBinding nombreNoValido = Bindings.createBooleanBinding(() -> {
             String nombre = input_nombre.getText();
@@ -153,43 +160,22 @@ public class RegistroSocioController implements Initializable {
         btn_registrarse.disableProperty().bind(datosValidos);
     }
 
-    @FXML
-    private void registrarse(ActionEvent event) throws ClubDAOException, IOException {
-
-        Club club = Club.getInstance();
-
-        //checkear si el usuario ya existe
-        List<Member> members = club.getMembers();
-        for (Member member : members) {
-            if (member.getNickName().equals(input_usuario.getText())) {
-                // COMPLETAR - Si se encuentra un miembro con el mismo usuario, mostrar el error
-                //...
-                return;
-            }
-        }
+    private void cambiarDatos(ActionEvent event) throws ClubDAOException, IOException {
 
         //registrar miembro
+        Club club = Club.getInstance();
+
         int svc = input_svc.getText().equals("") ? 0 : Integer.parseInt(input_svc.getText());
 
-        Member result = club.registerMember(
-                input_nombre.getText(),
-                input_apellidos.getText(),
-                input_telefono.getText(),
-                input_usuario.getText(),
-                input_password.getText(),
-                input_tarjeta.getText(),
-                svc,
-                null);
-
-        //desactivar boton de registro
-        btn_registrarse.disableProperty().unbind();
-        btn_registrarse.disableProperty().setValue(Boolean.TRUE);
+        //COMPLETAR - CAMBIAR DATOS
+        //....
+        
 
         // Mostrar modal
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Usuario registrado");
+        alert.setTitle("Datos actualizados correctamente");
         alert.setHeaderText(null);
-        alert.setContentText("Su usuario ha sido registrado satisfactoriamente. Ahora puede iniciar sesión.");
+        alert.setContentText("Sus datos han sido actualizados satisfactoriamente.");
 
         // Agregar un ícono de éxito
         ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/successIcon.png")));
@@ -198,44 +184,26 @@ public class RegistroSocioController implements Initializable {
         alert.setGraphic(imageView);
 
         // Cambiar el texto del botón OK
-        ButtonType loginButtonType = new ButtonType("Iniciar sesión", ButtonData.OK_DONE);
+        ButtonType loginButtonType = new ButtonType("Entendido", ButtonData.OK_DONE);
         alert.getButtonTypes().setAll(loginButtonType);
 
         // Agregar un evento de botón
         Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
         loginButton.setOnAction(e -> {
-            try {
-                cambiarAInicioSesion();
-            } catch (IOException ex) {
-                Logger.getLogger(RegistroSocioController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            //COMPLETAR - ACCION TRAS DARLE AL BOTÓN DE ENTENDIDO
+            //...
         });
         alert.showAndWait();
 
     }
 
     @FXML
-    private void cambiarAInicioSesion() throws IOException {
-        Stage currentStage = (Stage) label_inicioSesion.getScene().getWindow();
-        currentStage.close();
-
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/inicioSesion.fxml"));
-        Parent root = miCargador.load();
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Iniciar sesión - Club de tenis GreenBall");
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(currentStage);
-        stage.getIcons().add(new Image("images/greenball.png"));
-
-        stage.show();
-
+    private void cambiarImagen(ActionEvent event) throws IOException {
+        //COMPLETAR
     }
 
     @FXML
-    private void cambiarImagen(ActionEvent event) throws IOException {
-        //COMPLETAR
+    private void cancelar(ActionEvent event) {
     }
 
 }
