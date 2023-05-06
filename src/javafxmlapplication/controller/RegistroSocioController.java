@@ -21,7 +21,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -37,7 +41,7 @@ import model.Club;
 import model.ClubDAOException;
 import model.Member;
 
-public class RegistroSocioController implements Initializable{
+public class RegistroSocioController implements Initializable {
 
     @FXML
     private Label label_inicioSesion;
@@ -80,7 +84,7 @@ public class RegistroSocioController implements Initializable{
      * Initializes the controller class.
      */
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         System.out.println("working");
         // Crear binding para el label de error del campo "nombre"
         BooleanBinding nombreNoValido = Bindings.createBooleanBinding(() -> {
@@ -149,24 +153,55 @@ public class RegistroSocioController implements Initializable{
         btn_registrarse.disableProperty().bind(datosValidos);
     }
 
-    //DA ERROR NO SE PORQUE - PREGUNTAR AL PROFESOR
     @FXML
-    private void registrarse(ActionEvent event) {
-        try {
-            Club.getInstance().registerMember(
-                    input_nombre.getText(),
-                    input_apellidos.getText(),
-                    input_telefono.getText(),
-                    input_usuario.getText(),
-                    input_password.getText(),
-                    "",
-                    0,
-                    null);
-        } catch (IOException ex) {
-            Logger.getLogger(RegistroSocioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClubDAOException ex) {
-            Logger.getLogger(RegistroSocioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void registrarse(ActionEvent event) throws ClubDAOException, IOException {
+
+        //registrar miembro
+        Club club = Club.getInstance();
+
+        int svc = input_svc.getText().equals("") ? 0 : Integer.parseInt(input_svc.getText());
+
+        Member result = club.registerMember(
+                input_nombre.getText(),
+                input_apellidos.getText(),
+                input_telefono.getText(),
+                input_usuario.getText(),
+                input_password.getText(),
+                input_tarjeta.getText(),
+                svc,
+                null);
+
+        //desactivar boton de registro
+        btn_registrarse.disableProperty().unbind();
+        btn_registrarse.disableProperty().setValue(Boolean.TRUE);
+
+        // Mostrar modal
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Usuario registrado");
+        alert.setHeaderText(null);
+        alert.setContentText("Su usuario ha sido registrado satisfactoriamente. Ahora puede iniciar sesión.");
+
+        // Agregar un ícono de éxito
+        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/successIcon.png")));
+        imageView.setFitHeight(64);
+        imageView.setFitWidth(64);
+        alert.setGraphic(imageView);
+
+        // Cambiar el texto del botón OK
+        ButtonType loginButtonType = new ButtonType("Iniciar sesión", ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(loginButtonType);
+
+        // Agregar un evento de botón
+        Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
+        loginButton.setOnAction(e -> {
+            try {
+                cambiarAInicioSesion();
+            } catch (IOException ex) {
+                Logger.getLogger(RegistroSocioController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        alert.showAndWait();
+
     }
 
     @FXML
