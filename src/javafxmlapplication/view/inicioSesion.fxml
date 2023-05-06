@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.InicioSesionController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.InicioSesionController">
    <left>
-      <Pane prefHeight="400.0" prefWidth="265.0" styleClass="linear-grad" BorderPane.alignment="CENTER">
+      <Pane prefHeight="400.0" prefWidth="265.0" styleClass="linear-grad" stylesheets="@../../css/registro_inicioSesion.css" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" layoutX="-3.0" layoutY="5.0" prefHeight="400.0" prefWidth="268.0">
                <children>
@@ -32,10 +32,6 @@
                </children>
             </VBox>
          </children>
-         <stylesheets>
-            <URL value="@../../css/registroSocio.css" />
-            <URL value="@../../css/registro_inicioSesion.css" />
-         </stylesheets>
       </Pane>
    </left>
    <center>
@@ -46,22 +42,18 @@
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
-            <Label layoutX="61.0" layoutY="99.0" text="Usuario">
+            <Label layoutX="71.0" layoutY="119.0" text="Usuario">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField layoutX="62.0" layoutY="123.0" prefHeight="33.0" prefWidth="205.0" promptText="Usuario" />
-            <TextField layoutX="61.0" layoutY="204.0" prefHeight="33.0" prefWidth="205.0" promptText="Contraseña" />
-            <Button layoutX="176.0" layoutY="269.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" styleClass="button1" text="Iniciar Sesión">
+            <TextField fx:id="input_usuario" layoutX="72.0" layoutY="143.0" prefHeight="33.0" prefWidth="205.0" promptText="Usuario" />
+            <TextField fx:id="input_password" layoutX="71.0" layoutY="231.0" prefHeight="33.0" prefWidth="205.0" promptText="Contraseña" />
+            <Button fx:id="btn_iniciarSesion" layoutX="184.0" layoutY="306.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="32.0" prefWidth="90.0" styleClass="button1" stylesheets="@../../css/registro_inicioSesion.css" text="Iniciar Sesión">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor>
-               <stylesheets>
-                  <URL value="@../../css/registroSocio.css" />
-                  <URL value="@../../css/registro_inicioSesion.css" />
-               </stylesheets></Button>
-            <Label fx:id="label_passOlvidada" alignment="CENTER" layoutX="81.0" layoutY="323.0" prefHeight="22.0" prefWidth="175.0" styleClass="clickable-label" stylesheets="@../../css/registro_inicioSesion.css" text="¿Has olvidado la contraseña?">
+               </cursor></Button>
+            <Label fx:id="label_passOlvidada" alignment="CENTER" layoutX="89.0" layoutY="373.0" prefHeight="22.0" prefWidth="175.0" styleClass="clickable-label" stylesheets="@../../css/registro_inicioSesion.css" text="¿Has olvidado la contraseña?">
                <font>
                   <Font size="11.0" />
                </font>
@@ -69,24 +61,24 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Button fx:id="btn_registro" layoutX="70.0" layoutY="351.0" mnemonicParsing="false" onAction="#cambiarARegistro" prefHeight="35.0" prefWidth="196.0" styleClass="button2" text="¿No estás registrado? Regístrate">
+            <Button fx:id="btn_registro" layoutX="78.0" layoutY="401.0" mnemonicParsing="false" onAction="#cambiarARegistro" prefHeight="35.0" prefWidth="196.0" styleClass="button2" text="¿No estás registrado? Regístrate">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <stylesheets>
                   <URL value="@../../css/registro_inicioSesion.css" />
                </stylesheets></Button>
-            <Label layoutX="60.0" layoutY="180.0" text="Contraseña">
+            <Label layoutX="70.0" layoutY="207.0" text="Contraseña">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="62.0" layoutY="242.0" prefHeight="17.0" prefWidth="203.0" text="Contraseña incorrecta" textFill="#ff0202" visible="false">
+            <Label fx:id="label_errorPassword" layoutX="72.0" layoutY="269.0" prefHeight="17.0" prefWidth="203.0" text="Contraseña incorrecta" textFill="#ff0202" visible="false">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="60.0" layoutY="159.0" prefHeight="17.0" prefWidth="203.0" text="Usuario incorrecto" textFill="#ff0202" visible="false">
+            <Label fx:id="label_errorUsuario" layoutX="70.0" layoutY="179.0" prefHeight="17.0" prefWidth="203.0" text="Nombre de usuario incorrecto" textFill="#ff0202" visible="false">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
