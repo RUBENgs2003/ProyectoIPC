@@ -80,7 +80,7 @@
                   <Image url="@../../images/default.png" />
                </image>
             </ImageView>
-            <Button fx:id="btn_cambiarDatos" layoutX="371.0" layoutY="596.0" mnemonicParsing="false" onAction="#cambiarDatos" prefHeight="32.0" prefWidth="126.0" styleClass="button1" stylesheets="@../../css/registro_inicioSesion.css" text="Aceptar">
+            <Button fx:id="btn_cambiarDatos" layoutX="371.0" layoutY="596.0" mnemonicParsing="false" onAction="#cambiarDatos" prefHeight="32.0" prefWidth="126.0" styleClass="button1" stylesheets="@../../css/registro_inicioSesion.css" text="Guardar cambios">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -90,9 +90,9 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="input_usuario" layoutX="51.0" layoutY="314.0" prefHeight="33.0" prefWidth="205.0" promptText="Nombre de usuario" />
+            <TextField fx:id="input_usuario" editable="false" layoutX="51.0" layoutY="314.0" prefHeight="33.0" prefWidth="205.0" promptText="Nombre de usuario" />
             <PasswordField fx:id="input_password" layoutX="50.0" layoutY="403.0" prefHeight="33.0" prefWidth="205.0" promptText="Contraseña" />
-            <Label layoutX="49.0" layoutY="379.0" text="Contraseña *">
+            <Label layoutX="49.0" layoutY="379.0" text="Nueva contraseña *">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

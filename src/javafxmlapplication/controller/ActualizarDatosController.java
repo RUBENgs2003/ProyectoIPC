@@ -82,17 +82,13 @@ public class ActualizarDatosController implements Initializable {
     @FXML
     private Button btn_cancelar;
 
+    private Member member;
+
     /**
      * Initializes the controller class.
      */
     public void initialize(URL url, ResourceBundle rb) {
 
-        
-        //COMPLETAR - obtener member registrado y poner los valores de los campos
-        
-        //input_nombre.setText(member.getName());
-        //...
-        
         // Crear binding para el label de error del campo "nombre"
         BooleanBinding nombreNoValido = Bindings.createBooleanBinding(() -> {
             String nombre = input_nombre.getText();
@@ -157,19 +153,40 @@ public class ActualizarDatosController implements Initializable {
                 .or(telefonoNoValido).or(passwordNoValido).or(usuarioNoValido).or(numeroNoValido).or(codigoNoValido);
 
         // Vincular el binding resultante con la propiedad visible del label de error global
-        btn_registrarse.disableProperty().bind(datosValidos);
+        btn_cambiarDatos.disableProperty().bind(datosValidos);
     }
 
+    public void setMemberInfo(Member member) {
+        this.member = member;
+        input_nombre.setText(member.getName());
+        input_apellidos.setText(member.getSurname());
+        if (member.getSvc() == 0) {
+            input_svc.setText("");
+        } else {
+            input_svc.setText(String.valueOf(member.getSvc()));
+        }
+        input_tarjeta.setText(member.getCreditCard());
+        input_telefono.setText(member.getTelephone());
+        input_usuario.setText(member.getNickName());
+        //COMPLETAR - IMAGEN
+        //...
+    }
+
+    @FXML
     private void cambiarDatos(ActionEvent event) throws ClubDAOException, IOException {
 
-        //registrar miembro
-        Club club = Club.getInstance();
-
+        //actualizar datos del miembro
         int svc = input_svc.getText().equals("") ? 0 : Integer.parseInt(input_svc.getText());
 
-        //COMPLETAR - CAMBIAR DATOS
-        //....
-        
+        member.setCreditCard(input_tarjeta.getText());
+
+        //COMPLETAR - CAMBIAR IMAGEN
+        //member.setImage(image); ...
+        member.setName(input_nombre.getText());
+        member.setPassword(input_password.getText());
+        member.setTelephone(input_telefono.getText());
+        member.setSvc(svc);
+        member.setSurname(input_apellidos.getText());
 
         // Mostrar modal
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -190,8 +207,27 @@ public class ActualizarDatosController implements Initializable {
         // Agregar un evento de botón
         Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
         loginButton.setOnAction(e -> {
-            //COMPLETAR - ACCION TRAS DARLE AL BOTÓN DE ENTENDIDO
-            //...
+            
+            //CAMBIO DE VENTANA - LA VENTANA/ESCENA ACTUAL ES PROVISIONAL.
+            Stage currentStage = (Stage) btn_cancelar.getScene().getWindow();
+            currentStage.close();
+
+            FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/inicioSesion.fxml"));
+            Parent root = null;
+            try {
+                root = miCargador.load();
+            } catch (IOException ex) {
+                Logger.getLogger(ActualizarDatosController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Iniciar sesión - Club de tenis GreenBall");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(currentStage);
+            stage.getIcons().add(new Image("images/greenball.png"));
+
+            stage.show();
         });
         alert.showAndWait();
 
@@ -203,7 +239,21 @@ public class ActualizarDatosController implements Initializable {
     }
 
     @FXML
-    private void cancelar(ActionEvent event) {
+    private void cancelar(ActionEvent event) throws IOException {
+        Stage currentStage = (Stage) btn_cancelar.getScene().getWindow();
+        currentStage.close();
+
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/inicioSesion.fxml"));
+        Parent root = miCargador.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Iniciar sesión - Club de tenis GreenBall");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(currentStage);
+        stage.getIcons().add(new Image("images/greenball.png"));
+
+        stage.show();
     }
 
 }

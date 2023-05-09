@@ -91,7 +91,6 @@ public class InicioSesionController implements Initializable {
 
         //obtenemos si el usuario existe
         Boolean exists = Club.getInstance().existsLogin(input_usuario.getText());
-        System.out.println(exists);
         //si no existe mostramos el error
         label_errorUsuario.visibleProperty().setValue(!exists);
 
@@ -102,8 +101,25 @@ public class InicioSesionController implements Initializable {
             label_errorPassword.visibleProperty().setValue(member == null);
 
             if (member != null) {
-                System.out.println("Inicio de sesion correcto");
-                //COMPLETAR - INICIO DE SESION CORRECTO
+                
+                Stage currentStage = (Stage) btn_registro.getScene().getWindow();
+                currentStage.close();
+
+                //ESCENA PROVISIONAL PARA HACER PRUEBAS. AQUÍ SE PONDRÁ LA PRINCIPAL (LA DE LAS RESERVAS)
+                FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/actualizarDatos.fxml"));
+                Parent root = miCargador.load();
+                ActualizarDatosController controller = miCargador.getController();
+                controller.setMemberInfo(member);
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Registrar socio - Club de tenis GreenBall");
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.initOwner(currentStage);
+                stage.getIcons().add(new Image("images/greenball.png"));
+
+                stage.show();
+                
             }
         }
 
