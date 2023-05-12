@@ -15,7 +15,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.RegistroSocioController">
    <left>
-      <Pane prefHeight="400.0" prefWidth="265.0" styleClass="linear-grad" stylesheets="@../../css/registro_inicioSesion.css" BorderPane.alignment="CENTER">
+      <Pane prefHeight="400.0" prefWidth="265.0" styleClass="linear-grad" stylesheets="@../../css/styles.css" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" layoutX="-3.0" layoutY="5.0" prefHeight="662.0" prefWidth="268.0">
                <children>
@@ -49,12 +49,12 @@
             </Label>
             <TextField fx:id="input_nombre" layoutX="52.0" layoutY="123.0" prefHeight="33.0" prefWidth="205.0" promptText="Nombre" />
             <TextField fx:id="input_telefono" layoutX="51.0" layoutY="210.0" prefHeight="33.0" prefWidth="205.0" promptText="Número de teléfono" />
-            <Button fx:id="btn_cambiarImagen" layoutX="310.0" layoutY="402.0" mnemonicParsing="false" onAction="#cambiarImagen" prefHeight="32.0" prefWidth="173.0" styleClass="button2" stylesheets="@../../css/registro_inicioSesion.css" text="Cambiar imagen (opcional)">
+            <Button fx:id="btn_cambiarImagen" layoutX="310.0" layoutY="402.0" mnemonicParsing="false" onAction="#cambiarImagen" prefHeight="32.0" prefWidth="173.0" styleClass="button2" stylesheets="@../../css/styles.css" text="Cambiar imagen (opcional)">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="label_inicioSesion" alignment="CENTER" layoutX="179.0" layoutY="567.0" onMouseClicked="#cambiarAInicioSesion" prefHeight="22.0" prefWidth="212.0" styleClass="clickable-label" stylesheets="@../../css/registro_inicioSesion.css" text="¿Ya estás registrado? Inicia sesión">
+            <Label fx:id="label_inicioSesion" alignment="CENTER" layoutX="179.0" layoutY="567.0" onMouseClicked="#cambiarAInicioSesion" prefHeight="22.0" prefWidth="212.0" styleClass="clickable-label" stylesheets="@../../css/styles.css" text="¿Ya estás registrado? Inicia sesión">
                <font>
                   <Font size="11.0" />
                </font>
@@ -88,7 +88,7 @@
                   <Image url="@../../images/default.png" />
                </image>
             </ImageView>
-            <Button fx:id="btn_registrarse" layoutX="54.0" layoutY="598.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="32.0" prefWidth="441.0" styleClass="button1" stylesheets="@../../css/registro_inicioSesion.css" text="Registrarse">
+            <Button fx:id="btn_registrarse" layoutX="54.0" layoutY="598.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="32.0" prefWidth="441.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Registrarse">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

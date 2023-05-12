@@ -16,7 +16,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.InicioSesionController">
    <left>
-      <Pane prefHeight="400.0" prefWidth="265.0" styleClass="linear-grad" stylesheets="@../../css/registro_inicioSesion.css" BorderPane.alignment="CENTER">
+      <Pane prefHeight="400.0" prefWidth="265.0" styleClass="linear-grad" stylesheets="@../../css/styles.css" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" layoutX="-3.0" layoutY="5.0" prefHeight="400.0" prefWidth="268.0">
                <children>
@@ -50,11 +50,11 @@
             </Label>
             <TextField fx:id="input_usuario" layoutX="72.0" layoutY="143.0" prefHeight="33.0" prefWidth="205.0" promptText="Usuario" />
             <PasswordField fx:id="input_password" layoutX="71.0" layoutY="231.0" prefHeight="33.0" prefWidth="205.0" promptText="Contraseña" text="" />
-            <Button fx:id="btn_iniciarSesion" layoutX="184.0" layoutY="306.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="32.0" prefWidth="90.0" styleClass="button1" stylesheets="@../../css/registro_inicioSesion.css" text="Iniciar Sesión">
+            <Button fx:id="btn_iniciarSesion" layoutX="184.0" layoutY="306.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="32.0" prefWidth="90.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Iniciar Sesión">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Label fx:id="label_passOlvidada" alignment="CENTER" layoutX="89.0" layoutY="373.0" prefHeight="22.0" prefWidth="175.0" styleClass="clickable-label" stylesheets="@../../css/registro_inicioSesion.css" text="¿Has olvidado la contraseña?">
+            <Label fx:id="label_passOlvidada" alignment="CENTER" layoutX="89.0" layoutY="373.0" prefHeight="22.0" prefWidth="175.0" styleClass="clickable-label" stylesheets="@../../css/styles.css" text="¿Has olvidado la contraseña?">
                <font>
                   <Font size="11.0" />
                </font>
@@ -67,7 +67,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <stylesheets>
-                  <URL value="@../../css/registro_inicioSesion.css" />
+                  <URL value="@../../css/styles.css" />
                </stylesheets></Button>
             <Label layoutX="70.0" layoutY="207.0" text="Contraseña">
                <font>

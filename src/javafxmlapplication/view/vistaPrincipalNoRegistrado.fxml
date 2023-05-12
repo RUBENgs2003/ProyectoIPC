@@ -18,7 +18,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" stylesheets="@../../css/registro_inicioSesion.css" BorderPane.alignment="CENTER">
+      <ToolBar prefHeight="40.0" prefWidth="200.0" stylesheets="@../../css/styles.css" BorderPane.alignment="CENTER">
          <items>
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="358.0">
                <padding>
@@ -64,7 +64,7 @@
       </HBox>
    </bottom>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <GridPane alignment="CENTER">
                <columnConstraints>
@@ -73,88 +73,158 @@
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <DatePicker GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha seleccionada:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
-            <GridPane fx:id="grid" alignment="CENTER" focusTraversable="true">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="477.6666259765625" minWidth="-Infinity" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="730.0">
                <children>
-                  <Label fx:id="labelCol" text="Reservas" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
+                  <Label text="Pista 1 Disponible">
+                     <HBox.margin>
+                        <Insets left="60.0" right="60.0" />
+                     </HBox.margin>
                   </Label>
-                  <Label text="9:00 - 10:30" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <GridPane.margin>
-                        <Insets right="4.0" />
-                     </GridPane.margin>
+                  <Label text="Pista 2 Disponible">
+                     <HBox.margin>
+                        <Insets left="60.0" right="60.0" />
+                     </HBox.margin>
                   </Label>
-                  <Label text="10:30 - 12:00" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="4.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="12:00 - 13:30" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="4.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="13:30 - 15:00" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="4.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="15:00 - 16:30" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="4.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="16:30 - 18:00" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="4.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="18:00 - 19:30" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="4.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="19:30 - 21:00" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="4.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="21:00 - 22:30" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="4.0" />
-                     </GridPane.margin>
+                  <Label text="Pista 3 Disponible">
+                     <HBox.margin>
+                        <Insets left="60.0" right="60.0" />
+                     </HBox.margin>
                   </Label>
                </children>
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets left="10.0" right="10.0" />
                </VBox.margin>
-            </GridPane>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="131.0" prefWidth="718.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/tennisCourt1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/tennisCourt2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/tennisCourt3.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="730.0">
+               <children>
+                  <Label text="Pista 4 Disponible">
+                     <HBox.margin>
+                        <Insets left="60.0" right="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Pista 5 Disponible">
+                     <HBox.margin>
+                        <Insets left="60.0" right="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Pista 6 Disponible">
+                     <HBox.margin>
+                        <Insets left="60.0" right="60.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="130.0" prefWidth="718.0">
+               <children>
+                  <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/tennisCourt4.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/tennisCourt5.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/tennisCourt6.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

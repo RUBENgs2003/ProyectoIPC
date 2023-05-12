@@ -15,7 +15,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ActualizarDatosController">
    <left>
-      <Pane prefHeight="400.0" prefWidth="265.0" styleClass="linear-grad" stylesheets="@../../css/registro_inicioSesion.css" BorderPane.alignment="CENTER">
+      <Pane prefHeight="400.0" prefWidth="265.0" styleClass="linear-grad" stylesheets="@../../css/styles.css" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" layoutX="-3.0" layoutY="5.0" prefHeight="662.0" prefWidth="268.0">
                <children>
@@ -49,7 +49,7 @@
             </Label>
             <TextField fx:id="input_nombre" layoutX="52.0" layoutY="123.0" prefHeight="33.0" prefWidth="205.0" promptText="Nombre" />
             <TextField fx:id="input_telefono" layoutX="51.0" layoutY="210.0" prefHeight="33.0" prefWidth="205.0" promptText="Número de teléfono" />
-            <Button fx:id="btn_cambiarImagen" layoutX="310.0" layoutY="402.0" mnemonicParsing="false" onAction="#cambiarImagen" prefHeight="32.0" prefWidth="173.0" styleClass="button2" stylesheets="@../../css/registro_inicioSesion.css" text="Cambiar imagen (opcional)">
+            <Button fx:id="btn_cambiarImagen" layoutX="310.0" layoutY="402.0" mnemonicParsing="false" onAction="#cambiarImagen" prefHeight="32.0" prefWidth="173.0" styleClass="button2" stylesheets="@../../css/styles.css" text="Cambiar imagen (opcional)">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -80,7 +80,7 @@
                   <Image url="@../../images/default.png" />
                </image>
             </ImageView>
-            <Button fx:id="btn_cambiarDatos" layoutX="371.0" layoutY="596.0" mnemonicParsing="false" onAction="#cambiarDatos" prefHeight="32.0" prefWidth="126.0" styleClass="button1" stylesheets="@../../css/registro_inicioSesion.css" text="Guardar cambios">
+            <Button fx:id="btn_cambiarDatos" layoutX="371.0" layoutY="596.0" mnemonicParsing="false" onAction="#cambiarDatos" prefHeight="32.0" prefWidth="126.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Guardar cambios">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -134,7 +134,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Label>
-            <Button fx:id="btn_cancelar" layoutX="229.0" layoutY="596.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: #C3AFD4;" styleClass="button2" stylesheets="@../../css/registro_inicioSesion.css" text="Cancelar">
+            <Button fx:id="btn_cancelar" layoutX="229.0" layoutY="596.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: #C3AFD4;" styleClass="button2" stylesheets="@../../css/styles.css" text="Cancelar">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
