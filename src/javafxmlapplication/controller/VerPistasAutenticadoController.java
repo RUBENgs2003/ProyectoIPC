@@ -96,7 +96,7 @@ public class VerPistasAutenticadoController implements Initializable {
     private Button btn_reservarPista;
     @FXML
     private Button btn_actualizarDatos;
-    
+
     Member member;
 
     @Override
@@ -305,7 +305,7 @@ public class VerPistasAutenticadoController implements Initializable {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Ver pistas - Club de tenis GreenBall");
+        stage.setTitle("Registrar socio - Club de tenis GreenBall");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
@@ -314,6 +314,7 @@ public class VerPistasAutenticadoController implements Initializable {
     }
 
     void setMemberInfo(Member member) {
+        this.member = member;
         text_nombreApellidos.setText(member.getName() + " " + member.getSurname());
         //COMPLETAR - PONER IMAGEN DEL USUARIO
 

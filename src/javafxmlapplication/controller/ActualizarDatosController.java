@@ -207,22 +207,23 @@ public class ActualizarDatosController implements Initializable {
         // Agregar un evento de botón
         Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
         loginButton.setOnAction(e -> {
-            
-            //CAMBIO DE VENTANA - LA VENTANA/ESCENA ACTUAL ES PROVISIONAL.
-            Stage currentStage = (Stage) btn_cancelar.getScene().getWindow();
+
+            Stage currentStage = (Stage) btn_cambiarDatos.getScene().getWindow();
             currentStage.close();
 
-            FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/inicioSesion.fxml"));
+            FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/verPistasAutenticado.fxml"));
             Parent root = null;
             try {
                 root = miCargador.load();
             } catch (IOException ex) {
                 Logger.getLogger(ActualizarDatosController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            VerPistasAutenticadoController controller = miCargador.getController();
+            controller.setMemberInfo(member);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("Iniciar sesión - Club de tenis GreenBall");
+            stage.setTitle("Ver pistas - Club de tenis GreenBall");
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(currentStage);
             stage.getIcons().add(new Image("images/greenball.png"));
@@ -240,15 +241,17 @@ public class ActualizarDatosController implements Initializable {
 
     @FXML
     private void cancelar(ActionEvent event) throws IOException {
-        Stage currentStage = (Stage) btn_cancelar.getScene().getWindow();
+        Stage currentStage = (Stage) btn_cambiarDatos.getScene().getWindow();
         currentStage.close();
 
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/inicioSesion.fxml"));
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/verPistasAutenticado.fxml"));
         Parent root = miCargador.load();
+        VerPistasAutenticadoController controller = miCargador.getController();
+        controller.setMemberInfo(member);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Iniciar sesión - Club de tenis GreenBall");
+        stage.setTitle("Ver pistas - Club de tenis GreenBall");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
