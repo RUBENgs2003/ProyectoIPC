@@ -23,7 +23,7 @@ public class JavaFXMLApplication extends Application {
         
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader= new  FXMLLoader(getClass().getResource("view/inicioSesion.fxml"));
+        FXMLLoader loader= new  FXMLLoader(getClass().getResource("view/verPistas.fxml"));
         Parent root = loader.load();
         //======================================================================
         // 2- creación de la escena con el nodo raiz del grafo de escena
@@ -33,7 +33,7 @@ public class JavaFXMLApplication extends Application {
         //     - configuracion del stage
         //     - se muestra el stage de manera no modal mediante el metodo show()
         stage.setScene(scene);
-        stage.setTitle("Iniciar sesión - Club de tenis GreenBall");
+        stage.setTitle("Disponibilidad de las pistas - Club de Tenis GreenBall");
         stage.getIcons().add(new Image("images/greenball.png"));
         stage.show();
     } 

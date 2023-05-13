@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,25 +17,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.VerPistasController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" stylesheets="@../../css/styles.css" BorderPane.alignment="CENTER">
          <items>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="358.0">
-               <padding>
-                  <Insets left="10.0" right="10.0" />
-               </padding>
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="718.0">
                <children>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="button2" text="Registrarse" textAlignment="CENTER">
+                  <Button fx:id="btn_registrarse" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#cambiarARegistro" styleClass="button2" text="Registrarse" textAlignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
                   </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="354.0">
-               <children>
-                  <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="button1" text="Iniciar sesión" textAlignment="CENTER">
+                  <Button fx:id="btn_iniciarSesion" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#cambiarAInicioSesion" styleClass="button1" text="Iniciar sesión" textAlignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -66,7 +63,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane alignment="CENTER">
+            <GridPane fx:id="gridPane" alignment="CENTER">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -76,23 +73,32 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <DatePicker GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha seleccionada:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha y hora seleccionada:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <HBox fx:id="gridPaneHbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <DatePicker fx:id="datePicker">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </DatePicker>
+                        <Spinner fx:id="spinner" editable="true" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="730.0">
                <children>
-                  <Label text="Pista 1 Disponible">
+                  <Label fx:id="lbl_pista1" text="Pista 1 Disponible">
                      <HBox.margin>
                         <Insets left="60.0" right="60.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Pista 2 Disponible">
+                  <Label fx:id="lbl_pista2" text="Pista 2 Disponible">
                      <HBox.margin>
                         <Insets left="60.0" right="60.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Pista 3 Disponible">
+                  <Label fx:id="lbl_pista3" text="Pista 3 Disponible">
                      <HBox.margin>
                         <Insets left="60.0" right="60.0" />
                      </HBox.margin>
@@ -109,7 +115,7 @@
                <children>
                   <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="img_pista1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/tennisCourt1.png" />
                            </image>
@@ -124,7 +130,7 @@
                   </Button>
                   <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="img_pista2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/tennisCourt2.png" />
                            </image>
@@ -139,7 +145,7 @@
                   </Button>
                   <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="img_pista3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/tennisCourt3.png" />
                            </image>
@@ -156,28 +162,31 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="730.0">
                <children>
-                  <Label text="Pista 4 Disponible">
+                  <Label fx:id="lbl_pista4" text="Pista 4 Disponible">
                      <HBox.margin>
                         <Insets left="60.0" right="60.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Pista 5 Disponible">
+                  <Label fx:id="lbl_pista5" text="Pista 5 Disponible">
                      <HBox.margin>
                         <Insets left="60.0" right="60.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Pista 6 Disponible">
+                  <Label fx:id="lbl_pista6" text="Pista 6 Disponible">
                      <HBox.margin>
                         <Insets left="60.0" right="60.0" />
                      </HBox.margin>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="130.0" prefWidth="718.0">
                <children>
                   <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="img_pista4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/tennisCourt4.png" />
                            </image>
@@ -192,7 +201,7 @@
                   </Button>
                   <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="img_pista4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/tennisCourt5.png" />
                            </image>
@@ -207,7 +216,7 @@
                   </Button>
                   <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="img_pista6" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/tennisCourt6.png" />
                            </image>
