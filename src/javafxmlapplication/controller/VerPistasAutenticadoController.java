@@ -10,15 +10,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,7 +36,6 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -46,51 +44,60 @@ import javafx.util.StringConverter;
 import model.Booking;
 import model.Club;
 import model.ClubDAOException;
+import model.Member;
 
 /**
  *
  * @author ruben
  */
-public class VerPistasController implements Initializable {
+public class VerPistasAutenticadoController implements Initializable {
 
     @FXML
-    private Button btn_registrarse;
+    private GridPane gridPane;
     @FXML
-    private Button btn_iniciarSesion;
+    private Text lbl_fechaHora;
+    @FXML
+    private HBox gridPaneHbox;
     @FXML
     private DatePicker datePicker;
     @FXML
+    private Spinner<LocalTime> spinner;
+    @FXML
     private Label lbl_pista1;
-    @FXML
-    private Label lbl_pista2;
-    @FXML
-    private Label lbl_pista3;
     @FXML
     private ImageView img_pista1;
     @FXML
+    private Label lbl_pista2;
+    @FXML
     private ImageView img_pista2;
+    @FXML
+    private Label lbl_pista3;
     @FXML
     private ImageView img_pista3;
     @FXML
     private Label lbl_pista4;
     @FXML
+    private ImageView img_pista4;
+    @FXML
     private Label lbl_pista5;
+    @FXML
+    private ImageView img_pista5;
     @FXML
     private Label lbl_pista6;
     @FXML
-    private ImageView img_pista4;
-    @FXML
     private ImageView img_pista6;
     @FXML
-    private GridPane gridPane;
+    private ImageView imgView_imagenMiembro;
     @FXML
-    private HBox gridPaneHbox;
+    private Text text_nombreApellidos;
     @FXML
-    private Spinner<LocalTime> spinner;
+    private Button btn_verReservas;
     @FXML
-    private Text lbl_fechaHora;
+    private Button btn_reservarPista;
     @FXML
-    private ImageView img_pista5;
+    private Button btn_actualizarDatos;
+    
+    Member member;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -193,44 +200,6 @@ public class VerPistasController implements Initializable {
 
     }
 
-    @FXML
-    private void cambiarAInicioSesion() throws IOException {
-        Stage currentStage = (Stage) lbl_pista1.getScene().getWindow();
-        currentStage.close();
-
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/inicioSesion.fxml"));
-        Parent root = miCargador.load();
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Iniciar sesión - Club de tenis GreenBall");
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(currentStage);
-        stage.getIcons().add(new Image("images/greenball.png"));
-
-        stage.show();
-
-    }
-
-    @FXML
-    private void cambiarARegistro() throws IOException {
-        Stage currentStage = (Stage) lbl_pista1.getScene().getWindow();
-        currentStage.close();
-
-        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/registroSocio.fxml"));
-        Parent root = miCargador.load();
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Registrar socio - Club de tenis GreenBall");
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(currentStage);
-        stage.getIcons().add(new Image("images/greenball.png"));
-
-        stage.show();
-
-    }
-
     private WritableImage cambiarImagenPista(Image imagen) {
         int width = (int) imagen.getWidth();
         int height = (int) imagen.getHeight();
@@ -263,7 +232,7 @@ public class VerPistasController implements Initializable {
     }
 
     private void obtenerDisponibilidad(Club club, LocalDate fecha) {
-        
+
         img_pista1.setImage(new Image("images/tennisCourt1.png"));
         img_pista2.setImage(new Image("images/tennisCourt2.png"));
         img_pista3.setImage(new Image("images/tennisCourt3.png"));
@@ -312,4 +281,42 @@ public class VerPistasController implements Initializable {
             }
         }
     }
+
+    @FXML
+    private void verReservas(ActionEvent event) {
+        //COMPLETAR
+    }
+
+    @FXML
+    private void reservarPista(ActionEvent event) {
+        //HAY QUE DECIDIR SI HACERLO CON UN BOTÓN Y QUE LLEVE A OTRA VENTANA 
+        //O SI HACERLO MEDIANTE UN CLICK A LA PISTA Y TRAS ESTO, ABRIR UNA VENTANA CON EL FORMULARIO
+    }
+
+    @FXML
+    private void actualizarDatos(ActionEvent event) throws IOException {
+        Stage currentStage = (Stage) btn_actualizarDatos.getScene().getWindow();
+        currentStage.close();
+
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/actualizarDatos.fxml"));
+        Parent root = miCargador.load();
+        ActualizarDatosController controller = miCargador.getController();
+        controller.setMemberInfo(member);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Ver pistas - Club de tenis GreenBall");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(currentStage);
+        stage.getIcons().add(new Image("images/greenball.png"));
+
+        stage.show();
+    }
+
+    void setMemberInfo(Member member) {
+        text_nombreApellidos.setText(member.getName() + " " + member.getSurname());
+        //COMPLETAR - PONER IMAGEN DEL USUARIO
+
+    }
+
 }

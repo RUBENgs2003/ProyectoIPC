@@ -18,21 +18,46 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.VerPistasController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.VerPistasAutenticadoController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" stylesheets="@../../css/styles.css" BorderPane.alignment="CENTER">
          <items>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="718.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="310.0">
                <children>
-                  <Button fx:id="btn_registrarse" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#cambiarARegistro" styleClass="button2" text="Registrarse" textAlignment="CENTER">
+                  <ImageView fx:id="imgView_imagenMiembro" fitHeight="28.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/default.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="text_nombreApellidos" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre y apellidos" wrappingWidth="212.53674507141113">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="408.0">
+               <children>
+                  <Button fx:id="btn_verReservas" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#verReservas" styleClass="button1" text="Ver mis reservas" textAlignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btn_iniciarSesion" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#cambiarAInicioSesion" styleClass="button1" text="Iniciar sesión" textAlignment="CENTER">
+                  <Button fx:id="btn_reservarPista" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#reservarPista" styleClass="button1" text="Reservar Pista" textAlignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btn_actualizarDatos" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#actualizarDatos" styleClass="button1" text="Actualizar datos" textAlignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
