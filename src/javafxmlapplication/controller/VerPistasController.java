@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,6 +36,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -81,6 +84,8 @@ public class VerPistasController implements Initializable {
     private HBox gridPaneHbox;
     @FXML
     private Spinner<LocalTime> spinner;
+    @FXML
+    private Text lbl_fechaHora;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -112,9 +117,9 @@ public class VerPistasController implements Initializable {
                             return LocalTime.parse(string, formatter);
                         }
                     });
-                    
+
                     setValue(LocalTime.now().plusHours(1).withMinute(0).withSecond(0)); // Establece el valor predeterminado
-                
+
                 }
 
                 @Override
@@ -134,17 +139,29 @@ public class VerPistasController implements Initializable {
 
             spinner.setValueFactory(valueFactory);
 
-            Label label = new Label(); // Crea una etiqueta para mostrar la hora seleccionada
+            datePicker.setValue(LocalDate.now());
 
-            // Agrega un listener al Spinner para actualizar la etiqueta cuando cambie la hora seleccionada
-            spinner.valueProperty().addListener((observable, oldValue, newValue) -> {
-                label.setText("Hora seleccionada: " + newValue.toString());
-            });
+            StringBinding fechaHoraBinding = Bindings.createStringBinding(() -> {
+
+                LocalDate fecha = datePicker.getValue(); // Obtener el valor del DatePicker
+                int hora = spinner.getValue().getHour(); // Obtener el valor del Spinner
+                return "Fecha seleccionada: " + fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + hora + ":00 horas"; // Combinar la fecha y la hora en un texto
+
+            }, datePicker.valueProperty(), spinner.valueProperty());
+
+            lbl_fechaHora.textProperty().bind(fechaHoraBinding); // Asignar el Binding al texto del Label
 
             club.getForDayBookings(LocalDate.now());
             List<Booking> bookings = Club.getInstance().getForDayBookings(LocalDate.now());
             for (Booking booking : bookings) {
-                System.out.println(booking.getCourt().getName() + " -> " + booking.getBookingDate().toString());
+                String pista = booking.getCourt().getName();
+                switch (pista) {
+                    case "Pista 1":
+                        img_pista1.setImage(cambiarImagenPista(img_pista1.getImage()));
+                        break;
+                    default:
+                        System.out.println(pista);
+                }
             }
 
         } catch (ClubDAOException ex) {
@@ -203,8 +220,10 @@ public class VerPistasController implements Initializable {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 Color color = pixelReader.getColor(x, y);
-                if (color.getGreen() > 0.5 && color.getBlue() > 0.5) {
-                    pixelWriter.setColor(x, y, Color.RED);
+                if (color.equals(Color.web("#55a357")) || color.equals(Color.web("#d8ead8")) 
+                        || color.equals(Color.web("#54a454")) || color.equals(Color.web("#90c391"))
+                        || color.equals(Color.web("#a0cca0"))) {
+                    pixelWriter.setColor(x, y, Color.web("#fb4949"));
                 } else {
                     pixelWriter.setColor(x, y, color);
                 }
