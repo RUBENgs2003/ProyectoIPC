@@ -102,7 +102,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                        <Button fx:id="btn_pista1" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#reservarPista" prefHeight="105.0" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                            <graphic>
                               <ImageView fx:id="img_pista1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -126,7 +126,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                        <Button fx:id="btn_pista2" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#reservarPista" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                            <graphic>
                               <ImageView fx:id="img_pista2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -150,7 +150,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                        <Button fx:id="btn_pista3" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#reservarPista" prefWidth="200.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                            <graphic>
                               <ImageView fx:id="img_pista3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -178,7 +178,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                        <Button fx:id="btn_pista4" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#reservarPista" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                            <graphic>
                               <ImageView fx:id="img_pista4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -199,7 +199,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                        <Button fx:id="btn_pista5" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#reservarPista" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                            <graphic>
                               <ImageView fx:id="img_pista5" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -220,7 +220,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
+                        <Button fx:id="btn_pista6" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#reservarPista" prefHeight="105.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css">
                            <graphic>
                               <ImageView fx:id="img_pista6" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -239,6 +239,14 @@
                   <Insets top="25.0" />
                </VBox.margin>
             </HBox>
+            <Label text="Inicie sesión si quiere llevar a cabo una reserva">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

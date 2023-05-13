@@ -19,12 +19,16 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -263,7 +267,7 @@ public class VerPistasController implements Initializable {
     }
 
     private void obtenerDisponibilidad(Club club, LocalDate fecha) {
-        
+
         img_pista1.setImage(new Image("images/tennisCourt1.png"));
         img_pista2.setImage(new Image("images/tennisCourt2.png"));
         img_pista3.setImage(new Image("images/tennisCourt3.png"));
@@ -281,35 +285,62 @@ public class VerPistasController implements Initializable {
         for (Booking booking : bookings) {
             String pista = booking.getCourt().getName();
             String miembroReserva = booking.getMember().getNickName();
-            switch (pista) {
-                case "Pista 1":
-                    lbl_pista1.setText("Pista 1 reservada - " + miembroReserva);
-                    img_pista1.setImage(cambiarImagenPista(img_pista1.getImage()));
-                    break;
-                case "Pista 2":
-                    lbl_pista2.setText("Pista 2 reservada - " + miembroReserva);
-                    img_pista2.setImage(cambiarImagenPista(img_pista2.getImage()));
-                    break;
-                case "Pista 3":
-                    lbl_pista3.setText("Pista 3 reservada - " + miembroReserva);
-                    img_pista3.setImage(cambiarImagenPista(img_pista3.getImage()));
-                    break;
-                case "Pista 4":
-                    lbl_pista4.setText("Pista 4 reservada - " + miembroReserva);
-                    img_pista4.setImage(cambiarImagenPista(img_pista4.getImage()));
-                    break;
-                case "Pista 5":
-                    lbl_pista5.setText("Pista 5 reservada - " + miembroReserva);
-                    img_pista5.setImage(cambiarImagenPista(img_pista5.getImage()));
-                    break;
-                case "Pista 6":
-                    lbl_pista6.setText("Pista 6 reservada - " + miembroReserva);
-                    img_pista6.setImage(cambiarImagenPista(img_pista6.getImage()));
-                    break;
-                default:
-                    System.out.println(pista);
-                    break;
+            //si la pista ya ha sido reservada a la hora seleccionada, marcarla como reservada
+            if (booking.getFromTime().toString().equals(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm")))) {
+                switch (pista) {
+
+                    case "Pista 1":
+                        lbl_pista1.setText("Pista 1 reservada - " + miembroReserva);
+                        img_pista1.setImage(cambiarImagenPista(img_pista1.getImage()));
+                        break;
+                    case "Pista 2":
+                        lbl_pista2.setText("Pista 2 reservada - " + miembroReserva);
+                        img_pista2.setImage(cambiarImagenPista(img_pista2.getImage()));
+                        break;
+                    case "Pista 3":
+                        lbl_pista3.setText("Pista 3 reservada - " + miembroReserva);
+                        img_pista3.setImage(cambiarImagenPista(img_pista3.getImage()));
+                        break;
+                    case "Pista 4":
+                        lbl_pista4.setText("Pista 4 reservada - " + miembroReserva);
+                        img_pista4.setImage(cambiarImagenPista(img_pista4.getImage()));
+                        break;
+                    case "Pista 5":
+                        lbl_pista5.setText("Pista 5 reservada - " + miembroReserva);
+                        img_pista5.setImage(cambiarImagenPista(img_pista5.getImage()));
+                        break;
+                    case "Pista 6":
+                        lbl_pista6.setText("Pista 6 reservada - " + miembroReserva);
+                        img_pista6.setImage(cambiarImagenPista(img_pista6.getImage()));
+                        break;
+                    default:
+                        System.out.println(pista);
+                        break;
+                }
             }
+
         }
+    }
+
+    @FXML
+    private void reservarPista(ActionEvent event) {
+
+        // Mostrar modal
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Alerta");
+        alert.setHeaderText(null);
+        alert.setContentText("Inicie sesión para llevar a cabo una reserva.");
+
+        // Cambiar el texto del botón OK
+        ButtonType loginButtonType = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(loginButtonType);
+
+        // Agregar un evento de botón
+        Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
+        loginButton.setOnAction(e -> {
+            alert.close();
+        });
+        alert.showAndWait();
+
     }
 }
