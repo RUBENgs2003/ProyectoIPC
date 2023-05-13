@@ -23,7 +23,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -44,6 +47,7 @@ import javafx.util.StringConverter;
 import model.Booking;
 import model.Club;
 import model.ClubDAOException;
+import model.Court;
 import model.Member;
 
 /**
@@ -98,6 +102,18 @@ public class VerPistasAutenticadoController implements Initializable {
     private Button btn_actualizarDatos;
 
     Member member;
+    @FXML
+    private Button btn_pista1;
+    @FXML
+    private Button btn_pista2;
+    @FXML
+    private Button btn_pista3;
+    @FXML
+    private Button btn_pista4;
+    @FXML
+    private Button btn_pista5;
+    @FXML
+    private Button btn_pista6;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -155,6 +171,7 @@ public class VerPistasAutenticadoController implements Initializable {
             datePicker.setDayCellFactory(picker -> new DateCell() {
                 @Override
                 public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
                     if (date.isBefore(LocalDate.now())) {
                         setDisable(true); // Desactivar la celda si la fecha es anterior a la fecha actual
                     }
@@ -250,35 +267,42 @@ public class VerPistasAutenticadoController implements Initializable {
         for (Booking booking : bookings) {
             String pista = booking.getCourt().getName();
             String miembroReserva = booking.getMember().getNickName();
-            switch (pista) {
-                case "Pista 1":
-                    lbl_pista1.setText("Pista 1 reservada - " + miembroReserva);
-                    img_pista1.setImage(cambiarImagenPista(img_pista1.getImage()));
-                    break;
-                case "Pista 2":
-                    lbl_pista2.setText("Pista 2 reservada - " + miembroReserva);
-                    img_pista2.setImage(cambiarImagenPista(img_pista2.getImage()));
-                    break;
-                case "Pista 3":
-                    lbl_pista3.setText("Pista 3 reservada - " + miembroReserva);
-                    img_pista3.setImage(cambiarImagenPista(img_pista3.getImage()));
-                    break;
-                case "Pista 4":
-                    lbl_pista4.setText("Pista 4 reservada - " + miembroReserva);
-                    img_pista4.setImage(cambiarImagenPista(img_pista4.getImage()));
-                    break;
-                case "Pista 5":
-                    lbl_pista5.setText("Pista 5 reservada - " + miembroReserva);
-                    img_pista5.setImage(cambiarImagenPista(img_pista5.getImage()));
-                    break;
-                case "Pista 6":
-                    lbl_pista6.setText("Pista 6 reservada - " + miembroReserva);
-                    img_pista6.setImage(cambiarImagenPista(img_pista6.getImage()));
-                    break;
-                default:
-                    System.out.println(pista);
-                    break;
+            //si la pista ya ha sido reservada a la hora seleccionada, marcarla como reservada
+            if (booking.getFromTime().toString().equals(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm")))) {
+                System.out.println(booking.getCourt().getName() + " reservada por " + booking.getMember().getNickName());
+                //MEJORABLE. LAS PISTAS PUEDEN TENER OTRO NOMBRE Y ESTO NO FUNCIONARIA
+                switch (pista) {
+                    
+                    case "Pista 1":
+                        lbl_pista1.setText("Pista 1 reservada por " + miembroReserva);
+                        img_pista1.setImage(cambiarImagenPista(img_pista1.getImage()));
+                        break;
+                    case "Pista 2":
+                        lbl_pista2.setText("Pista 2 reservada por " + miembroReserva);
+                        img_pista2.setImage(cambiarImagenPista(img_pista2.getImage()));
+                        break;
+                    case "Pista 3":
+                        lbl_pista3.setText("Pista 3 reservada por " + miembroReserva);
+                        img_pista3.setImage(cambiarImagenPista(img_pista3.getImage()));
+                        break;
+                    case "Pista 4":
+                        lbl_pista4.setText("Pista 4 reservada por " + miembroReserva);
+                        img_pista4.setImage(cambiarImagenPista(img_pista4.getImage()));
+                        break;
+                    case "Pista 5":
+                        lbl_pista5.setText("Pista 5 reservada por " + miembroReserva);
+                        img_pista5.setImage(cambiarImagenPista(img_pista5.getImage()));
+                        break;
+                    case "Pista 6":
+                        lbl_pista6.setText("Pista 6 reservada por " + miembroReserva);
+                        img_pista6.setImage(cambiarImagenPista(img_pista6.getImage()));
+                        break;
+                    default:
+                        System.out.println(pista);
+                        break;
+                }
             }
+
         }
     }
 
@@ -288,9 +312,108 @@ public class VerPistasAutenticadoController implements Initializable {
     }
 
     @FXML
-    private void reservarPista(ActionEvent event) {
-        //HAY QUE DECIDIR SI HACERLO CON UN BOTÓN Y QUE LLEVE A OTRA VENTANA 
-        //O SI HACERLO MEDIANTE UN CLICK A LA PISTA Y TRAS ESTO, ABRIR UNA VENTANA CON EL FORMULARIO
+    private void reservarPista(ActionEvent event) throws ClubDAOException, IOException {
+
+        Button btn = (Button) event.getSource();
+        String numPista = "";
+        String txtPagado = "";
+        Boolean pistaLibre = true;
+
+        if (Club.getInstance().hasCreditCard(member.getNickName())) {
+            txtPagado = "La reserva ha sido pagada a través de la tarjeta de crédito vinculada a su perfil.";
+        }
+
+        //registrar pista según el boton pulsado
+        LocalDate fechaSeleccionada = datePicker.getValue();
+
+        List<Booking> bookings = Club.getInstance().getForDayBookings(fechaSeleccionada);
+        
+        //MEJORABLE -> LAS PISTAS PUEDEN TENER OTRO NOMBRE Y ESTO NO FUNCIONARIA
+        String id = btn.getId();
+        switch (id) {
+            case "btn_pista1":
+                numPista = "1";
+                break;
+            case "btn_pista2":
+                numPista = "2";
+                break;
+            case "btn_pista3":
+                numPista = "3";
+                break;
+            case "btn_pista4":
+                numPista = "4";
+                break;
+            case "btn_pista5":
+                numPista = "5";
+                break;
+            case "btn_pista6":
+                numPista = "6";
+                break;
+            default:
+                break;
+        }
+
+        for (Booking booking : bookings) {
+            //obtewner si la pista seleccionada está reservada a la hora seleccionada
+            if (booking.getCourt().getName().equals("Pista " + numPista) && 
+                    booking.getFromTime().toString().equals(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm")))) {
+                pistaLibre = false;
+                break;
+            }
+        }
+
+        //se podria mejorar añadiendo un modal de confirmacion, etc
+        if (pistaLibre) {
+            // Mostrar modal
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Estado de la reserva");
+            alert.setHeaderText(null);
+            alert.setContentText("Ha reservado la pista " + numPista + " satisfactoriamente." + txtPagado);
+
+            // Agregar un ícono de éxito
+            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/successIcon.png")));
+            imageView.setFitHeight(64);
+            imageView.setFitWidth(64);
+            alert.setGraphic(imageView);
+
+            // Cambiar el texto del botón OK
+            ButtonType loginButtonType = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+            alert.getButtonTypes().setAll(loginButtonType);
+
+            // Agregar un evento de botón
+            Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
+            loginButton.setOnAction(e -> {
+                alert.close();
+            });
+            alert.showAndWait(); 
+
+            Court selectedCourt = Club.getInstance().getCourt("Pista " + numPista);
+            Club.getInstance().registerBooking(LocalDateTime.now(), fechaSeleccionada, spinner.getValue(), Club.getInstance().hasCreditCard(member.getNickName()), selectedCourt, member);
+            //refrescar las pistas - no funciona. No se muestra la pista reservada hasta que no vuelves a iniciar la app. 
+            //No se si es fallo de la base de datos o de que
+            obtenerDisponibilidad(Club.getInstance(), fechaSeleccionada);
+            
+        } else {
+
+            // Mostrar modal
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Estado de la reserva");
+            alert.setHeaderText(null);
+            alert.setContentText("La pista ya ha sido reservada por otro usuario para la fecha seleccionada.");
+
+            // Cambiar el texto del botón OK
+            ButtonType loginButtonType = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+            alert.getButtonTypes().setAll(loginButtonType);
+
+            // Agregar un evento de botón
+            Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
+            loginButton.setOnAction(e -> {
+                alert.close();
+            });
+            alert.showAndWait();
+
+        }
+
     }
 
     @FXML
