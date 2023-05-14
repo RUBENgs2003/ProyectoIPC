@@ -280,7 +280,6 @@ public class VerPistasAutenticadoController implements Initializable {
         lbl_pista6.setText(courts.get(5).getName() + " disponible");
 
         List<Booking> bookings = club.getForDayBookings(fecha);
-        System.out.println(fecha.toString());
         for (Booking booking : bookings) {
             String nombrePista = booking.getCourt().getName();
             String miembroReserva = booking.getMember().getNickName();
@@ -368,14 +367,8 @@ public class VerPistasAutenticadoController implements Initializable {
             alert.showAndWait();
 
             Court selectedCourt = Club.getInstance().getCourt(pistaSeleccionada.getName());
-            Booking reservaRegistrada = Club.getInstance().registerBooking(LocalDateTime.now(), fechaSeleccionada, spinner.getValue(), Club.getInstance().hasCreditCard(member.getNickName()), selectedCourt, member);
-            //refrescar las pistas - no funciona. No se muestra la pista reservada hasta que no vuelves a iniciar la app. 
-            //No se si es fallo de la base de datos o de que
+            Club.getInstance().registerBooking(LocalDateTime.now(), fechaSeleccionada, LocalTime.parse(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm"))), Club.getInstance().hasCreditCard(member.getNickName()), selectedCourt, member);
             obtenerDisponibilidad(Club.getInstance(), fechaSeleccionada);
-            
-            //pruebas - se puede borrar
-            //pistaSeleccionada.getImageView().setImage(cambiarImagenPista(pistaSeleccionada.getImageView().getImage()));
-            //pistaSeleccionada.getLabel().setText(pistaSeleccionada.getName() + " reservada por " + member.getNickName());
                         
         } else {
 
