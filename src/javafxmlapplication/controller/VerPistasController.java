@@ -11,7 +11,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +52,7 @@ import javafx.util.StringConverter;
 import model.Booking;
 import model.Club;
 import model.ClubDAOException;
+import model.Court;
 
 /**
  *
@@ -96,12 +99,24 @@ public class VerPistasController implements Initializable {
     @FXML
     private ImageView img_pista5;
 
+    Map<String, Pista> pistaMap = new HashMap<>();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
 
             Club club = Club.getInstance();
+
+            List<Court> courts = club.getCourts();
+
+            //se sabe que el número de pistas es 6 (no se puede aumentar ni disminuir)
+            pistaMap.put(courts.get(0).getName(), new Pista(img_pista1, lbl_pista1));
+            pistaMap.put(courts.get(1).getName(), new Pista(img_pista2, lbl_pista2));
+            pistaMap.put(courts.get(2).getName(), new Pista(img_pista3, lbl_pista3));
+            pistaMap.put(courts.get(3).getName(), new Pista(img_pista4, lbl_pista4));
+            pistaMap.put(courts.get(4).getName(), new Pista(img_pista5, lbl_pista5));
+            pistaMap.put(courts.get(5).getName(), new Pista(img_pista6, lbl_pista6));
 
             int timeDuration = club.getBookingDuration();
 
@@ -274,49 +289,33 @@ public class VerPistasController implements Initializable {
         img_pista4.setImage(new Image("images/tennisCourt4.png"));
         img_pista5.setImage(new Image("images/tennisCourt5.png"));
         img_pista6.setImage(new Image("images/tennisCourt6.png"));
-        lbl_pista1.setText("Pista 1 disponible");
-        lbl_pista2.setText("Pista 2 disponible");
-        lbl_pista3.setText("Pista 3 disponible");
-        lbl_pista4.setText("Pista 4 disponible");
-        lbl_pista5.setText("Pista 5 disponible");
-        lbl_pista6.setText("Pista 6 disponible");
+
+        List<Court> courts = club.getCourts();
+        
+        //mostrar como disponible, posteriormente se marcaran como reservados aquellos que lo esten
+        lbl_pista1.setText(courts.get(0).getName() + " disponible");
+        lbl_pista2.setText(courts.get(1).getName() + " disponible");
+        lbl_pista3.setText(courts.get(2).getName() + " disponible");
+        lbl_pista4.setText(courts.get(3).getName() + " disponible");
+        lbl_pista5.setText(courts.get(4).getName() + " disponible");
+        lbl_pista6.setText(courts.get(5).getName() + " disponible");
 
         List<Booking> bookings = club.getForDayBookings(fecha);
         for (Booking booking : bookings) {
-            String pista = booking.getCourt().getName();
+            String nombrePista = booking.getCourt().getName();
             String miembroReserva = booking.getMember().getNickName();
             //si la pista ya ha sido reservada a la hora seleccionada, marcarla como reservada
             if (booking.getFromTime().toString().equals(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm")))) {
-                switch (pista) {
 
-                    case "Pista 1":
-                        lbl_pista1.setText("Pista 1 reservada - " + miembroReserva);
-                        img_pista1.setImage(cambiarImagenPista(img_pista1.getImage()));
-                        break;
-                    case "Pista 2":
-                        lbl_pista2.setText("Pista 2 reservada - " + miembroReserva);
-                        img_pista2.setImage(cambiarImagenPista(img_pista2.getImage()));
-                        break;
-                    case "Pista 3":
-                        lbl_pista3.setText("Pista 3 reservada - " + miembroReserva);
-                        img_pista3.setImage(cambiarImagenPista(img_pista3.getImage()));
-                        break;
-                    case "Pista 4":
-                        lbl_pista4.setText("Pista 4 reservada - " + miembroReserva);
-                        img_pista4.setImage(cambiarImagenPista(img_pista4.getImage()));
-                        break;
-                    case "Pista 5":
-                        lbl_pista5.setText("Pista 5 reservada - " + miembroReserva);
-                        img_pista5.setImage(cambiarImagenPista(img_pista5.getImage()));
-                        break;
-                    case "Pista 6":
-                        lbl_pista6.setText("Pista 6 reservada - " + miembroReserva);
-                        img_pista6.setImage(cambiarImagenPista(img_pista6.getImage()));
-                        break;
-                    default:
-                        System.out.println(pista);
-                        break;
+                // Actualizar la ImageView y Label correspondiente al nombre de la pista
+                Pista pista = pistaMap.get(nombrePista);
+                if (pista != null) {
+                    pista.getLabel().setText(nombrePista + " reservada por " + miembroReserva);
+                    pista.getImageView().setImage(cambiarImagenPista(pista.getImageView().getImage()));
+                } else {
+                    System.out.println(pista);
                 }
+
             }
 
         }
@@ -341,6 +340,26 @@ public class VerPistasController implements Initializable {
             alert.close();
         });
         alert.showAndWait();
+
+    }
+
+    class Pista {
+
+        private final Label lbl;
+        private final ImageView imgView;
+
+        public Pista(ImageView imgView, Label lbl) {
+            this.lbl = lbl;
+            this.imgView = imgView;
+        }
+
+        public Label getLabel() {
+            return lbl;
+        }
+
+        public ImageView getImageView() {
+            return imgView;
+        }
 
     }
 }
