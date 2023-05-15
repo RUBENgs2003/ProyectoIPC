@@ -300,8 +300,25 @@ public class VerPistasAutenticadoController implements Initializable {
     }
 
     @FXML
-    private void verReservas(ActionEvent event) {
+    private void verReservas(ActionEvent event) throws IOException {
         //COMPLETAR
+        Stage currentStage = (Stage) lbl_pista1.getScene().getWindow();
+        currentStage.close();
+
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/verReservas.fxml"));
+        Parent root = miCargador.load();
+        VerReservasController controller = miCargador.getController();
+        controller.setMember(member);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Ver mis reservas - Club de tenis GreenBall");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(currentStage);
+        stage.getIcons().add(new Image("images/greenball.png"));
+
+        stage.show();
+
     }
 
     @FXML
