@@ -49,14 +49,6 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btn_reservarPista" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#reservarPista" styleClass="button1" text="Reservar Pista" textAlignment="CENTER">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="btn_actualizarDatos" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#actualizarDatos" styleClass="button1" text="Actualizar datos" textAlignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />

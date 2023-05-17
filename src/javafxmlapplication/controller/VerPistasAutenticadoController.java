@@ -99,8 +99,6 @@ public class VerPistasAutenticadoController implements Initializable {
     @FXML
     private Button btn_verReservas;
     @FXML
-    private Button btn_reservarPista;
-    @FXML
     private Button btn_actualizarDatos;
     @FXML
     private Button btn_pista1;
