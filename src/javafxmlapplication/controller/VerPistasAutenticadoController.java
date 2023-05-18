@@ -298,7 +298,7 @@ public class VerPistasAutenticadoController implements Initializable {
     }
 
     @FXML
-    private void verReservas(ActionEvent event) throws IOException {
+    private void verReservas(ActionEvent event) throws IOException, ClubDAOException {
         //COMPLETAR
         Stage currentStage = (Stage) lbl_pista1.getScene().getWindow();
         currentStage.close();
@@ -307,6 +307,7 @@ public class VerPistasAutenticadoController implements Initializable {
         Parent root = miCargador.load();
         VerReservasController controller = miCargador.getController();
         controller.setMember(member);
+        controller.cargarReservas();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
