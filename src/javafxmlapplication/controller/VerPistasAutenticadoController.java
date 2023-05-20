@@ -357,35 +357,93 @@ public class VerPistasAutenticadoController implements Initializable {
             }
         }
 
-        //se podria mejorar añadiendo un modal de confirmacion, etc
         if (pistaLibre) {
-            // Mostrar modal
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Estado de la reserva");
-            alert.setHeaderText(null);
-            alert.setContentText("Ha reservado la pista " + pistaSeleccionada.getName() + " satisfactoriamente." + txtPagado);
 
-            // Agregar un ícono de éxito
-            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/successIcon.png")));
-            imageView.setFitHeight(64);
-            imageView.setFitWidth(64);
-            alert.setGraphic(imageView);
+            // Obtener los datos de la reserva
+            String pista = pistaSeleccionada.getName();
+            int duracion = Club.getInstance().getBookingDuration();
+            String fechaEntrada = fechaSeleccionada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + LocalTime.parse(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm"))) + "h";
+            boolean pagado = Club.getInstance().hasCreditCard(member.getNickName()); // Si está pagado o no
 
-            // Cambiar el texto del botón OK
-            ButtonType loginButtonType = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
-            alert.getButtonTypes().setAll(loginButtonType);
+            // Calcular la duración en horas y minutos
+            int horas = duracion / 60;
+            int minutos = duracion % 60;
 
-            // Agregar un evento de botón
-            Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
-            loginButton.setOnAction(e -> {
-                alert.close();
+            // Crear el mensaje con los datos de la reserva, incluyendo la duración en horas y minutos
+            String duracionTexto = "";
+            if (horas > 0) {
+                duracionTexto += horas + " hora" + (horas > 1 ? "s" : "");
+            }
+            if (minutos > 0) {
+                if (!duracionTexto.isEmpty()) {
+                    duracionTexto += " ";
+                }
+                duracionTexto += minutos + " minuto" + (minutos > 1 ? "s" : "");
+            }
+
+            // Crear el mensaje con los datos de la reserva
+            String mensaje = "Datos de la reserva:\n\n"
+                    + "Nombre de la pista: " + pista + "\n"
+                    + "Duración: " + duracionTexto + "\n"
+                    + "Hora de entrada: " + fechaEntrada + "\n\n"
+                    + "AVISO: " + (pagado ? "El pago se llevará a cabo a través de la tarjeta de crédito vinculada a su perfil"
+                            : "No ha proporcionado ninguna tarjeta de crédito, por lo que deberá pagar la reserva posteriormente. Puede proporcionar una a través del botón 'actualizar datos'");
+
+            // Mostrar el modal de confirmación
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Confirmación de reserva");
+            confirmationAlert.setHeaderText(null);
+            confirmationAlert.setContentText("Está a punto de efectuar su reserva, confírmela para llevarla a cabo: " + "\n\n" + mensaje);
+
+            // Configurar los botones del modal
+            ButtonType cancelButton = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+            ButtonType confirmButton = new ButtonType("Confirmar reserva", ButtonBar.ButtonData.OK_DONE);
+            confirmationAlert.getButtonTypes().setAll(cancelButton, confirmButton);
+
+            // Obtener el botón de confirmar y asignarle un evento
+            Button confirmBtn = (Button) confirmationAlert.getDialogPane().lookupButton(confirmButton);
+            confirmBtn.setOnAction(e -> {
+                // Realizar acciones adicionales al confirmar la reserva
+                confirmationAlert.close();
             });
-            alert.showAndWait();
 
-            Court selectedCourt = Club.getInstance().getCourt(pistaSeleccionada.getName());
-            Club.getInstance().registerBooking(LocalDateTime.now(), fechaSeleccionada, LocalTime.parse(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm"))), Club.getInstance().hasCreditCard(member.getNickName()), selectedCourt, member);
-            obtenerDisponibilidad(Club.getInstance(), fechaSeleccionada);
-                        
+            // Mostrar el modal y esperar la respuesta
+            confirmationAlert.showAndWait();
+
+            // Verificar la opción seleccionada
+            if (confirmationAlert.getResult() == confirmButton) {
+
+                //RESERVAR PISTA 
+                Court selectedCourt = Club.getInstance().getCourt(pistaSeleccionada.getName());
+                Club.getInstance().registerBooking(LocalDateTime.now(), fechaSeleccionada, LocalTime.parse(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm"))), Club.getInstance().hasCreditCard(member.getNickName()), selectedCourt, member);
+                obtenerDisponibilidad(Club.getInstance(), fechaSeleccionada);
+
+                // El usuario confirmó la reserva
+                // Mostrar modal
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Estado de la reserva");
+                alert.setHeaderText(null);
+                alert.setContentText("Ha reservado la pista " + pistaSeleccionada.getName() + " satisfactoriamente." + txtPagado);
+
+                // Agregar un ícono de éxito
+                ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/successIcon.png")));
+                imageView.setFitHeight(64);
+                imageView.setFitWidth(64);
+                alert.setGraphic(imageView);
+
+                // Cambiar el texto del botón OK
+                ButtonType loginButtonType = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+                alert.getButtonTypes().setAll(loginButtonType);
+
+                // Agregar un evento de botón
+                Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
+                loginButton.setOnAction(e -> {
+                    alert.close();
+                });
+                alert.showAndWait();
+
+            }
+
         } else {
 
             // Mostrar modal
