@@ -119,6 +119,8 @@ public class VerReservasController implements Initializable {
             alert.showAndWait();
             //cancelar la reserva
             if(alert.getResult().getButtonData().equals(botonCancelar.getButtonData())){
+                //MEJORA : PONER MODAL DICIENDO QUE HA CANCELADO LA RESERVA CON EXITO
+                //si está pagada se podría decir que se le va a devolver el dinero
                 Booking delete = tableView.getSelectionModel().getSelectedItem();
                 Club.getInstance().removeBooking(delete);
                 cargarReservas();
@@ -156,6 +158,8 @@ public class VerReservasController implements Initializable {
         stage.show();
     }
 
+    //HAY UN BUG - Cuando reservas una pista sin tarjeta de credito se pone como pagada. cuando abres y cierras la aplicación se pone bien
+    // (como no pagada)
     void cargarReservas() throws ClubDAOException, IOException {
 
         List<Booking> bookings = Club.getInstance().getUserBookings(member.getNickName());
