@@ -22,7 +22,7 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" stylesheets="@../../css/styles.css" BorderPane.alignment="CENTER">
          <items>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="718.0">
+            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS"  prefHeight="30.0" prefWidth="718.0">
                <children>
                   <Button fx:id="btn_registrarse" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#cambiarARegistro" styleClass="button2" text="Registrarse" textAlignment="CENTER">
                      <cursor>

@@ -423,7 +423,7 @@ public class VerPistasAutenticadoController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Estado de la reserva");
                 alert.setHeaderText(null);
-                alert.setContentText("Ha reservado la pista " + pistaSeleccionada.getName() + " satisfactoriamente." + txtPagado);
+                alert.setContentText("Ha reservado la pista '" + pistaSeleccionada.getName() + "' satisfactoriamente.\n" + txtPagado);
 
                 // Agregar un ícono de éxito
                 ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/successIcon.png")));

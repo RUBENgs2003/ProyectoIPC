@@ -22,7 +22,7 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" stylesheets="@../../css/styles.css" BorderPane.alignment="CENTER">
          <items>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="310.0">
+            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS"  prefHeight="30.0" prefWidth="310.0">
                <children>
                   <ImageView fx:id="imgView_imagenMiembro" fitHeight="28.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
