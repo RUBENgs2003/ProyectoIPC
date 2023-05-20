@@ -23,7 +23,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -86,7 +89,7 @@ public class VerReservasController implements Initializable {
     }
 
     @FXML
-    private void cancelar(ActionEvent event) {
+    private void cancelar(ActionEvent event) throws ClubDAOException, IOException {
 
         //COMPLETAR - Mostrar modal de confirmación tipo: ¿Estás seguro de cancelar la reserva tal tal tal?
         //Solo se puede reservar con 24 horas de antelacion minimo
@@ -103,13 +106,23 @@ public class VerReservasController implements Initializable {
         // Comparar si la duracion es mayor o igual a 24 horas
         
         boolean cancelable = duration.toHours() >= 24;
-        System.out.println(cancelable);
         if (cancelable) {
             //CANCELAR RESERVA
             //mostrar modal de confirmacion
             //cancelar la reserva
+            Booking delete = tableView.getSelectionModel().getSelectedItem();
+            Club.getInstance().removeBooking(delete);
+            cargarReservas();
+            
         } else {
             //mostrar alerta/error
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No es posible cancelar una reserva con menos de 24 horas de antelación.");
+            ButtonType boton = new ButtonType("Volver",ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(boton);
+            alert.showAndWait();
         }
     }
 
