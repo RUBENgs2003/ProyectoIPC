@@ -109,13 +109,23 @@ public class VerReservasController implements Initializable {
         if (cancelable) {
             //CANCELAR RESERVA
             //mostrar modal de confirmacion
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cancelar reserva");
+            alert.setHeaderText(null);
+            alert.setContentText("¿Seguro que quieres cancelar la reserva?");
+            ButtonType botonCancelar = new ButtonType("Sí",ButtonBar.ButtonData.OK_DONE);
+            ButtonType botonVolver = new ButtonType("Volver",ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(botonCancelar,botonVolver);
+            alert.showAndWait();
             //cancelar la reserva
-            Booking delete = tableView.getSelectionModel().getSelectedItem();
-            Club.getInstance().removeBooking(delete);
-            cargarReservas();
+            if(alert.getResult().getButtonData().equals(botonCancelar.getButtonData())){
+                Booking delete = tableView.getSelectionModel().getSelectedItem();
+                Club.getInstance().removeBooking(delete);
+                cargarReservas();
+            }
             
         } else {
-            //mostrar alerta/error
+            //mostrar error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
