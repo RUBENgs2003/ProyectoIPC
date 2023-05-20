@@ -450,7 +450,7 @@ public class VerPistasAutenticadoController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Estado de la reserva");
             alert.setHeaderText(null);
-            alert.setContentText("La pista ya ha sido reservada por otro usuario para la fecha seleccionada.");
+            alert.setContentText("La pista ya ha sido reservada para la fecha seleccionada.");
 
             // Cambiar el texto del botón OK
             ButtonType loginButtonType = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
