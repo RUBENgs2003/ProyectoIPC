@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,9 +39,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -60,10 +55,6 @@ import model.Court;
  */
 public class VerPistasController implements Initializable {
 
-    @FXML
-    private Button btn_registrarse;
-    @FXML
-    private Button btn_iniciarSesion;
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -88,10 +79,6 @@ public class VerPistasController implements Initializable {
     private ImageView img_pista4;
     @FXML
     private ImageView img_pista6;
-    @FXML
-    private GridPane gridPane;
-    @FXML
-    private HBox gridPaneHbox;
     @FXML
     private Spinner<LocalTime> spinner;
     @FXML

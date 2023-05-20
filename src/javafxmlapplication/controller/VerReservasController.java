@@ -10,11 +10,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import static java.time.LocalTime.now;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -26,9 +24,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Booking;
@@ -59,6 +59,10 @@ public class VerReservasController implements Initializable {
     private TableColumn<Booking, String> col_fechaReserva;
     @FXML
     private TableColumn<Booking, String> col_estadoReserva;
+    @FXML
+    private ImageView img_usuario;
+    @FXML
+    private Label lbl_nombreApellidos;
 
     /**
      * Initializes the controller class.
@@ -76,6 +80,9 @@ public class VerReservasController implements Initializable {
 
     void setMember(Member member) {
         this.member = member;
+        lbl_nombreApellidos.setText(member.getName() + " " + member.getSurname());
+        //COMPLETAR - poner la imagen del usuario
+        //...
     }
 
     @FXML
