@@ -66,6 +66,7 @@ public class RegistroSocioController implements Initializable {
     private TextField input_svc;
     @FXML
     private ImageView imagenPerfil;
+    private int numeroImagen = 1;
     @FXML
     private Label errorTelefono;
     @FXML
@@ -170,7 +171,7 @@ public class RegistroSocioController implements Initializable {
 
         //registrar miembro
         int svc = input_svc.getText().equals("") ? 0 : Integer.parseInt(input_svc.getText());
-
+        
         Member result = club.registerMember(
                 input_nombre.getText(),
                 input_apellidos.getText(),
@@ -179,7 +180,7 @@ public class RegistroSocioController implements Initializable {
                 input_password.getText(),
                 input_tarjeta.getText(),
                 svc,
-                null);
+                imagenPerfil.getImage());
 
         //desactivar boton de registro
         btn_registrarse.disableProperty().unbind();
@@ -236,6 +237,37 @@ public class RegistroSocioController implements Initializable {
     @FXML
     private void cambiarImagen(ActionEvent event) throws IOException {
         //COMPLETAR
+        
+        numeroImagen++;
+        String archivoHombre = "/images/men";
+        String archivoMujer = "/images/woman";
+
+        switch(numeroImagen){
+            //case 1, 2 ,3, 4, 5: No soportado
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                imagenPerfil.setImage(new Image(new String(archivoHombre + numeroImagen + ".png")));
+                break;
+            //case 6, 7, 8, 9, 10, 11:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+                imagenPerfil.setImage(new Image(new String(archivoMujer + (numeroImagen - 5) + ".png")));
+                break;
+            case 12:
+                imagenPerfil.setImage(new Image("/images/greenball.png"));
+                break;
+            case 13:
+                imagenPerfil.setImage(new Image("/images/default.png"));
+                numeroImagen = 0;
+        }
+        
     }
 
 }
