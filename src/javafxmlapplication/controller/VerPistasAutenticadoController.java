@@ -491,7 +491,9 @@ public class VerPistasAutenticadoController implements Initializable {
         this.member = member;
         text_nombreApellidos.setText(member.getName() + " " + member.getSurname());
         //COMPLETAR - PONER IMAGEN DEL USUARIO
-
+        imgView_imagenMiembro.setImage(member.getImage());
+        
+        
     }
 
     class Pista {
