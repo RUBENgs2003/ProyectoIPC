@@ -79,19 +79,18 @@ public class VerReservasController implements Initializable {
         selectedBooking.addListener((obs, oldSelection, newSelection) -> {
             btn_cancel.disableProperty().setValue(newSelection == null);
         });
+        tableView.setPlaceholder(new Label("No ha realizado ninguna reserva"));
     }
 
     void setMember(Member member) {
         this.member = member;
         lbl_nombreApellidos.setText(member.getName() + " " + member.getSurname());
-        //COMPLETAR - poner la imagen del usuario
-        //...
+        img_usuario.setImage(member.getImage());
     }
 
     @FXML
     private void cancelar(ActionEvent event) throws ClubDAOException, IOException {
 
-        //COMPLETAR - Mostrar modal de confirmación tipo: ¿Estás seguro de cancelar la reserva tal tal tal?
         //Solo se puede reservar con 24 horas de antelacion minimo
         ReadOnlyObjectProperty<Booking> selectedBooking = tableView.getSelectionModel().selectedItemProperty();
         LocalDate dia = selectedBooking.getValue().getMadeForDay();
@@ -107,7 +106,6 @@ public class VerReservasController implements Initializable {
         
         boolean cancelable = duration.toHours() >= 24;
         if (cancelable) {
-            //CANCELAR RESERVA
             //mostrar modal de confirmacion
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Cancelar reserva");
@@ -119,8 +117,11 @@ public class VerReservasController implements Initializable {
             alert.showAndWait();
             //cancelar la reserva
             if(alert.getResult().getButtonData().equals(botonCancelar.getButtonData())){
-                //MEJORA : PONER MODAL DICIENDO QUE HA CANCELADO LA RESERVA CON EXITO
+                //COMPLETAR - PONER MODAL DICIENDO QUE HA CANCELADO LA RESERVA CON EXITO
+                //...
                 //si está pagada se podría decir que se le va a devolver el dinero
+                
+                //eliminar reserva
                 Booking delete = tableView.getSelectionModel().getSelectedItem();
                 Club.getInstance().removeBooking(delete);
                 cargarReservas();
@@ -140,6 +141,7 @@ public class VerReservasController implements Initializable {
 
     @FXML
     private void volver(ActionEvent event) throws IOException {
+        //volver atras - ventana principal
         Stage currentStage = (Stage) btn_volver.getScene().getWindow();
         currentStage.close();
 
@@ -158,6 +160,7 @@ public class VerReservasController implements Initializable {
         stage.show();
     }
 
+    //HAY QUE ARREGLAR ESTO
     //HAY UN BUG - Cuando reservas una pista sin tarjeta de credito se pone como pagada. cuando abres y cierras la aplicación se pone bien
     // (como no pagada)
     void cargarReservas() throws ClubDAOException, IOException {

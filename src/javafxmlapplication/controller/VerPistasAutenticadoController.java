@@ -299,7 +299,7 @@ public class VerPistasAutenticadoController implements Initializable {
 
     @FXML
     private void verReservas(ActionEvent event) throws IOException, ClubDAOException {
-        //COMPLETAR
+        //salto a ventana de ver reservas
         Stage currentStage = (Stage) lbl_pista1.getScene().getWindow();
         currentStage.close();
 
@@ -337,7 +337,6 @@ public class VerPistasAutenticadoController implements Initializable {
 
         List<Booking> bookings = Club.getInstance().getForDayBookings(fechaSeleccionada);
 
-        //MEJORABLE -> LAS PISTAS PUEDEN TENER OTRO NOMBRE Y ESTO NO FUNCIONARIA
         //obtener el nombre de la pista
         for (Pista pista : pistaMap.values()) {
 
@@ -394,7 +393,7 @@ public class VerPistasAutenticadoController implements Initializable {
             confirmationAlert.setTitle("Confirmación de reserva");
             confirmationAlert.setHeaderText(null);
             confirmationAlert.setContentText("Está a punto de efectuar su reserva, confírmela para llevarla a cabo: " + "\n\n" + mensaje);
-
+            confirmationAlert.setHeight(400);
             // Configurar los botones del modal
             ButtonType cancelButton = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
             ButtonType confirmButton = new ButtonType("Confirmar reserva", ButtonBar.ButtonData.OK_DONE);
@@ -413,9 +412,10 @@ public class VerPistasAutenticadoController implements Initializable {
             // Verificar la opción seleccionada
             if (confirmationAlert.getResult() == confirmButton) {
 
-                //RESERVAR PISTA 
+                //reservar pista
                 Court selectedCourt = Club.getInstance().getCourt(pistaSeleccionada.getName());
-                Club.getInstance().registerBooking(LocalDateTime.now(), fechaSeleccionada, LocalTime.parse(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm"))), Club.getInstance().hasCreditCard(member.getNickName()), selectedCourt, member);
+                Club.getInstance().registerBooking(LocalDateTime.now(), fechaSeleccionada, LocalTime.parse(spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm"))), pagado, selectedCourt, member);
+                //actualizar el estado de las pistas
                 obtenerDisponibilidad(Club.getInstance(), fechaSeleccionada);
 
                 // El usuario confirmó la reserva
@@ -469,6 +469,7 @@ public class VerPistasAutenticadoController implements Initializable {
 
     @FXML
     private void actualizarDatos(ActionEvent event) throws IOException {
+        //salto a ventana de cambiarDatos
         Stage currentStage = (Stage) btn_actualizarDatos.getScene().getWindow();
         currentStage.close();
 
@@ -490,12 +491,12 @@ public class VerPistasAutenticadoController implements Initializable {
     void setMemberInfo(Member member) {
         this.member = member;
         text_nombreApellidos.setText(member.getName() + " " + member.getSurname());
-        //COMPLETAR - PONER IMAGEN DEL USUARIO
         imgView_imagenMiembro.setImage(member.getImage());
         
         
     }
 
+    //clase auxiliar
     class Pista {
 
         private final Label lbl;

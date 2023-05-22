@@ -236,7 +236,6 @@ public class RegistroSocioController implements Initializable {
 
     @FXML
     private void cambiarImagen(ActionEvent event) throws IOException {
-        //COMPLETAR
         
         numeroImagen++;
         String archivoHombre = "/images/men";
