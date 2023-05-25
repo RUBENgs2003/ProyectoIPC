@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.Club;
 
 
 public class JavaFXMLApplication extends Application {
@@ -20,7 +19,7 @@ public class JavaFXMLApplication extends Application {
     public void start(Stage stage) throws Exception {
         
         //Club.getInstance().setInitialData(); //ESTO ES PARA QUE SE BORREN TODOS LOS DATOS EN LA BD Y PODER HACER PRUEBAS
-        
+
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
         FXMLLoader loader= new  FXMLLoader(getClass().getResource("view/verPistas.fxml"));

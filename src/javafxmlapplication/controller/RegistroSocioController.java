@@ -103,9 +103,8 @@ public class RegistroSocioController implements Initializable {
         errorApellidos.visibleProperty().bind(apellidosNoValidos);
 
         // Crear binding para el label de error del campo "telefono"
-        //NOTA: NO SE SI ES NECESARIO HACER EL REGEX - PREGUNTAR AL PROFESOR
         BooleanBinding telefonoNoValido = Bindings.createBooleanBinding(() -> {
-            String regexTel = "\\d{9,}";
+            String regexTel = "\\d{9}";
             String telefono = input_telefono.getText();
             return telefono.isEmpty() || !telefono.matches(regexTel);
         }, input_telefono.textProperty());
@@ -144,8 +143,6 @@ public class RegistroSocioController implements Initializable {
         errorTarjeta.visibleProperty().bind(numeroNoValido);
         errorSVC.visibleProperty().bind(codigoNoValido);
 
-        //si todos los campos son validos -> registrarse
-        //COMPLETAR
         // Crear un binding que dependa de todos los bindings anteriores
         BooleanBinding datosValidos = Bindings.or(nombreNoValido, apellidosNoValidos)
                 .or(telefonoNoValido).or(passwordNoValido).or(usuarioNoValido).or(numeroNoValido).or(codigoNoValido);

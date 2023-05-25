@@ -22,7 +22,7 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" stylesheets="@../../css/styles.css" BorderPane.alignment="CENTER">
          <items>
-            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS"  prefHeight="30.0" prefWidth="310.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="310.0" HBox.hgrow="ALWAYS">
                <children>
                   <ImageView fx:id="imgView_imagenMiembro" fitHeight="28.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -53,6 +53,14 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                  </Button>
+                  <Button fx:id="btn_cerrarSesion" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#cerrarSesion" styleClass="button1" text="Cerrar sesión" textAlignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
                   </Button>
                </children>
             </HBox>

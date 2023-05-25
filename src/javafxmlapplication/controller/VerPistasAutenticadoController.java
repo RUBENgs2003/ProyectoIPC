@@ -115,6 +115,8 @@ public class VerPistasAutenticadoController implements Initializable {
 
     Member member;
     Map<String, Pista> pistaMap = new HashMap<>();
+    @FXML
+    private Button btn_cerrarSesion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -492,8 +494,25 @@ public class VerPistasAutenticadoController implements Initializable {
         this.member = member;
         text_nombreApellidos.setText(member.getName() + " " + member.getSurname());
         imgView_imagenMiembro.setImage(member.getImage());
-        
-        
+
+    }
+
+    @FXML
+    private void cerrarSesion(ActionEvent event) throws IOException {
+        Stage currentStage = (Stage) btn_cerrarSesion.getScene().getWindow();
+        currentStage.close();
+
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/verPistas.fxml"));
+        Parent root = miCargador.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Ver pistas - Club de tenis GreenBall");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(currentStage);
+        stage.getIcons().add(new Image("images/greenball.png"));
+
+        stage.show();
     }
 
     //clase auxiliar
