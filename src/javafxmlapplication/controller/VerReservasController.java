@@ -160,9 +160,6 @@ public class VerReservasController implements Initializable {
         stage.show();
     }
 
-    //HAY QUE ARREGLAR ESTO
-    //HAY UN BUG - Cuando reservas una pista sin tarjeta de credito se pone como pagada. cuando abres y cierras la aplicación se pone bien
-    // (como no pagada)
     void cargarReservas() throws ClubDAOException, IOException {
 
         List<Booking> bookings = Club.getInstance().getUserBookings(member.getNickName());
