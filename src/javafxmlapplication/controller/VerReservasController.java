@@ -124,8 +124,35 @@ public class VerReservasController implements Initializable {
             alert.showAndWait();
             //cancelar la reserva
             if (alert.getResult().getButtonData().equals(botonCancelar.getButtonData())) {
-                //COMPLETAR - PONER MODAL DICIENDO QUE HA CANCELADO LA RESERVA CON EXITO
-                //...
+
+                String txt_pagado = "\nNota: No se procederá a realizar el cobro.";
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setTitle("Reserva cancelada");
+                alert2.setHeaderText(null);
+                
+                if(selectedBooking.getValue().getPaid()){
+                    alert2.setContentText("Ha cancelado la reserva con éxito." + txt_pagado);
+                } else {
+                    alert2.setContentText("Ha cancelado la reserva con éxito.");
+                }
+                alert2.setContentText("Ha cancelado la reserva con éxito.");
+
+                // Agregar un ícono de éxito
+                ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/successIcon.png")));
+                imageView.setFitHeight(64);
+                imageView.setFitWidth(64);
+                alert2.setGraphic(imageView);
+
+                // Cambiar el texto del botón OK
+                ButtonType loginButtonType = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+                alert2.getButtonTypes().setAll(loginButtonType);
+
+                // Agregar un evento de botón
+                Button loginButton = (Button) alert2.getDialogPane().lookupButton(loginButtonType);
+                loginButton.setOnAction(e -> {
+                    alert2.close();
+                });
+                alert2.showAndWait();
                 //si está pagada se podría decir que se le va a devolver el dinero
 
                 //eliminar reserva
