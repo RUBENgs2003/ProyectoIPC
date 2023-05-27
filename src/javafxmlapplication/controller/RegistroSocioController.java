@@ -285,7 +285,6 @@ public class RegistroSocioController implements Initializable {
             }, input_usuario.textProperty());
             errorUsuario.visibleProperty().bind(usuarioNoValido);
             flag = true;
-            System.out.println("PROP DE errorUsuario RESTAURADA");
         }
     }
 }

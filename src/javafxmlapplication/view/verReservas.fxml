@@ -54,7 +54,8 @@
             <columns>
                 <TableColumn fx:id="col_nombrePista" prefWidth="169.59998166561127" text="Nombre de la pista" />
                 <TableColumn fx:id="col_fechaHoraEntrada" prefWidth="170.4000244140625" text="Fecha y Hora de entrada" />
-                <TableColumn fx:id="col_fechaReserva" prefWidth="191.99990844726562" text="Fecha de la reserva" />
+            <TableColumn fx:id="col_fechaHoraSalida" prefWidth="154.0" text="Fecha y Hora de salida" />
+                <TableColumn fx:id="col_fechaReserva" prefWidth="141.0" text="Fecha de la reserva" />
                 <TableColumn fx:id="col_estadoReserva" prefWidth="207.20001220703125" text="Estado de la reserva" />
             </columns>
             <columnResizePolicy>
