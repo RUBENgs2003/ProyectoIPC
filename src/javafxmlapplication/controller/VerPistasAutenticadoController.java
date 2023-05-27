@@ -6,6 +6,7 @@ package javafxmlapplication.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -137,6 +138,10 @@ public class VerPistasAutenticadoController implements Initializable {
             int timeDuration = club.getBookingDuration();
 
             SpinnerValueFactory<LocalTime> valueFactory = new SpinnerValueFactory<LocalTime>() {
+
+                private final LocalTime minTime = LocalTime.of(9, 0);
+                private final LocalTime maxTime = LocalTime.of(21, 0);
+
                 {
                     setConverter(new StringConverter<LocalTime>() {
                         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -166,15 +171,28 @@ public class VerPistasAutenticadoController implements Initializable {
                 public void decrement(int steps) {
                     LocalTime time = getValue();
                     int minutes = steps * timeDuration;
-                    setValue(time.minusMinutes(minutes));
+                    if (time.minusMinutes(minutes).compareTo(minTime) >= 0) {
+                        setValue(time.minusMinutes(minutes));
+                    } else {
+                        Duration duration = Duration.between(minTime, time);
+                        long minutesUntilMinTime = duration.toMinutes() % (maxTime.toSecondOfDay() / 60);
+                        setValue(maxTime.minusMinutes(minutesUntilMinTime));
+                    }
                 }
 
                 @Override
                 public void increment(int steps) {
                     LocalTime time = getValue();
                     int minutes = steps * timeDuration;
-                    setValue(time.plusMinutes(minutes));
+                    if (time.plusMinutes(minutes).compareTo(maxTime) <= 0) {
+                        setValue(time.plusMinutes(minutes));
+                    } else {
+                        Duration duration = Duration.between(time, maxTime);
+                        long minutesUntilMaxTime = duration.toMinutes() % (maxTime.toSecondOfDay() / 60);
+                        setValue(minTime.plusMinutes(minutesUntilMaxTime));
+                    }
                 }
+
             };
 
             spinner.setValueFactory(valueFactory);
