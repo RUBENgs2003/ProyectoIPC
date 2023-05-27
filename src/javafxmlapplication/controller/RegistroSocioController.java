@@ -81,11 +81,13 @@ public class RegistroSocioController implements Initializable {
     private Label errorTarjeta;
     @FXML
     private Label errorSVC;
+    private boolean flag;
 
     /**
      * Initializes the controller class.
      */
     public void initialize(URL url, ResourceBundle rb) {
+        flag = true;
 
         // Crear binding para el label de error del campo "nombre"
         BooleanBinding nombreNoValido = Bindings.createBooleanBinding(() -> {
@@ -155,60 +157,66 @@ public class RegistroSocioController implements Initializable {
     private void registrarse(ActionEvent event) throws ClubDAOException, IOException {
 
         Club club = Club.getInstance();
-
         //checkear si el usuario ya existe
         List<Member> members = club.getMembers();
         for (Member member : members) {
             if (member.getNickName().equals(input_usuario.getText())) {
-                // COMPLETAR - Si se encuentra un miembro con el mismo usuario, mostrar el error
-                //...
-                return;
+                flag = false;
+                break;
             }
         }
 
-        //registrar miembro
-        int svc = input_svc.getText().equals("") ? 0 : Integer.parseInt(input_svc.getText());
-        
-        Member result = club.registerMember(
-                input_nombre.getText(),
-                input_apellidos.getText(),
-                input_telefono.getText(),
-                input_usuario.getText(),
-                input_password.getText(),
-                input_tarjeta.getText(),
-                svc,
-                imagenPerfil.getImage());
+        if (flag) {
 
-        //desactivar boton de registro
-        btn_registrarse.disableProperty().unbind();
-        btn_registrarse.disableProperty().setValue(Boolean.TRUE);
+            //registrar miembro
+            int svc = input_svc.getText().equals("") ? 0 : Integer.parseInt(input_svc.getText());
 
-        // Mostrar modal
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Usuario registrado");
-        alert.setHeaderText(null);
-        alert.setContentText("Su usuario ha sido registrado satisfactoriamente. Ahora puede iniciar sesión.");
+            Member result = club.registerMember(
+                    input_nombre.getText(),
+                    input_apellidos.getText(),
+                    input_telefono.getText(),
+                    input_usuario.getText(),
+                    input_password.getText(),
+                    input_tarjeta.getText(),
+                    svc,
+                    imagenPerfil.getImage());
 
-        // Agregar un ícono de éxito
-        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/successIcon.png")));
-        imageView.setFitHeight(64);
-        imageView.setFitWidth(64);
-        alert.setGraphic(imageView);
+            //desactivar boton de registro
+            btn_registrarse.disableProperty().unbind();
+            btn_registrarse.disableProperty().setValue(Boolean.TRUE);
 
-        // Cambiar el texto del botón OK
-        ButtonType loginButtonType = new ButtonType("Iniciar sesión", ButtonData.OK_DONE);
-        alert.getButtonTypes().setAll(loginButtonType);
+            // Mostrar modal
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Usuario registrado");
+            alert.setHeaderText(null);
+            alert.setContentText("Su usuario ha sido registrado satisfactoriamente. Ahora puede iniciar sesión.");
 
-        // Agregar un evento de botón
-        Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
-        loginButton.setOnAction(e -> {
-            try {
-                cambiarAInicioSesion();
-            } catch (IOException ex) {
-                Logger.getLogger(RegistroSocioController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        alert.showAndWait();
+            // Agregar un ícono de éxito
+            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/successIcon.png")));
+            imageView.setFitHeight(64);
+            imageView.setFitWidth(64);
+            alert.setGraphic(imageView);
+
+            // Cambiar el texto del botón OK
+            ButtonType loginButtonType = new ButtonType("Iniciar sesión", ButtonData.OK_DONE);
+            alert.getButtonTypes().setAll(loginButtonType);
+
+            // Agregar un evento de botón
+            Button loginButton = (Button) alert.getDialogPane().lookupButton(loginButtonType);
+            loginButton.setOnAction(e -> {
+                try {
+                    cambiarAInicioSesion();
+                } catch (IOException ex) {
+                    Logger.getLogger(RegistroSocioController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            alert.showAndWait();
+
+        } else {
+            errorUsuario.visibleProperty().unbind();
+            errorUsuario.setText("Este nombre de usuario ya está en uso");
+            errorUsuario.setVisible(true);
+        }
 
     }
 
@@ -233,12 +241,12 @@ public class RegistroSocioController implements Initializable {
 
     @FXML
     private void cambiarImagen(ActionEvent event) throws IOException {
-        
+
         numeroImagen++;
         String archivoHombre = "/images/men";
         String archivoMujer = "/images/woman";
 
-        switch(numeroImagen){
+        switch (numeroImagen) {
             //case 1, 2 ,3, 4, 5: No soportado
             case 1:
             case 2:
@@ -263,7 +271,21 @@ public class RegistroSocioController implements Initializable {
                 imagenPerfil.setImage(new Image("/images/default.png"));
                 numeroImagen = 0;
         }
-        
+
     }
 
+    @FXML
+    private void escribe_usuario(MouseEvent event) {
+        if (!flag) {
+            errorUsuario.setText("Introduce un nombre de usuario");
+            // Crear binding para el label de error del campo "usuario"
+            BooleanBinding usuarioNoValido = Bindings.createBooleanBinding(() -> {
+                String usuario = input_usuario.getText();
+                return usuario.isEmpty();
+            }, input_usuario.textProperty());
+            errorUsuario.visibleProperty().bind(usuarioNoValido);
+            flag = true;
+            System.out.println("PROP DE errorUsuario RESTAURADA");
+        }
+    }
 }
