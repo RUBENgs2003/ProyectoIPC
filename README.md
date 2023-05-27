@@ -4,6 +4,9 @@ Proyecto asignatura Interfaces Persona-Computador (IPC). 2do Curso Ingeniería I
 Cosas que faltan:
 
 - Poder cambiar la imagen de perfil en la ventana "Actualizar datos"
-- Cambiar el texto de los label de error en la ventana de "registro" y en la de inicio de sesión. Ej: Si el usuario no existe, que en el label ponga "El usuario no existe" por ejemplo.
-- Si en la ventana de registro, el usuario introduce un username que ya existe, notificarlo con el label. Actualmente no notifica nada (y no deja hacer el registro)
-- Mostrar modal notificando al usuario de que ha cancelado la reserva con éxito. 
+
+- Lo del límite de 2 horas al reservar ( ver pdf del entregable )
+
+- Poner un icono (por ejemplo) para poder ver la contraseña en el registro
+
+- Poner un límite al tamaño mínimo de cada ventana
