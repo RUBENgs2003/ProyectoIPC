@@ -3,8 +3,6 @@ Proyecto asignatura Interfaces Persona-Computador (IPC). 2do Curso Ingeniería I
 
 Cosas que faltan:
 
-- Poder cambiar la imagen de perfil en la ventana "Actualizar datos"
-
 - Lo del límite de 2 horas al reservar ( ver pdf del entregable )
 
 - Poner un icono (por ejemplo) para poder ver la contraseña en el registro
