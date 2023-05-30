@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,14 +9,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="242.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="javafxmlapplication.controller.SeleccionarImagenController">
+<AnchorPane id="AnchorPane" prefHeight="242.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SeleccionarImagenController">
    <children>
       <VBox prefHeight="304.0" prefWidth="600.0" stylesheets="@../../css/styles.css">
          <children>
             <HBox alignment="CENTER" prefHeight="129.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="men4" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="men4" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -26,8 +26,11 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="men1" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="men1" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -38,8 +41,11 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="men2" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="men2" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -50,8 +56,11 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="men3" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="men3" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -62,8 +71,11 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="men5" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="men5" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -74,8 +86,11 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="woman6" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="woman6" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -83,6 +98,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
                <padding>
@@ -91,7 +109,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="129.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="woman5" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="woman5" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -102,8 +120,11 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="woman1" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="woman1" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -114,8 +135,11 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="woman2" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="woman2" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -126,8 +150,11 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="woman3" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="woman3" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -138,8 +165,11 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="woman4" mnemonicParsing="false" prefHeight="72.0" prefWidth="87.0" styleClass="button3">
+                  <Button fx:id="woman4" mnemonicParsing="false" onAction="#imgSeleccionada" prefHeight="72.0" prefWidth="87.0">
                      <graphic>
                         <ImageView fitHeight="82.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -147,6 +177,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
                <padding>

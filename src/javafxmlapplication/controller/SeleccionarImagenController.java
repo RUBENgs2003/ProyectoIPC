@@ -50,11 +50,38 @@ public class SeleccionarImagenController {
     @FXML
     private Button btn_aceptar;
 
+    private String imagen = "default";
+    private Stage seleccionarImagenStage;
+    private Button lastButtonSelected;
+
     public void initialize() {
-        //TODO
+        btn_aceptar.disableProperty().setValue(Boolean.TRUE);
     }
 
     @FXML
     private void seleccionarImagen(ActionEvent event) {
+        seleccionarImagenStage.close();
+    }
+
+    public void setStage(Stage stage) {
+        this.seleccionarImagenStage = stage;
+    }
+
+    String getImagen() {
+        return imagen;
+    }
+
+    @FXML
+    private void imgSeleccionada(ActionEvent event) {
+        Button btn = (Button) event.getSource();
+        if(lastButtonSelected == null) lastButtonSelected = btn;
+        else{
+            lastButtonSelected.getStyleClass().clear();
+            lastButtonSelected.getStyleClass().add("button");
+            lastButtonSelected = btn;
+        }
+        btn.getStyleClass().add("button3");
+        imagen = btn.getId();
+        btn_aceptar.disableProperty().setValue(Boolean.FALSE);
     }
 }

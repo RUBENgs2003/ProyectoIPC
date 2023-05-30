@@ -253,35 +253,27 @@ public class RegistroSocioController implements Initializable {
     @FXML
     private void cambiarImagen(ActionEvent event) throws IOException {
 
-        numeroImagen++;
-        String archivoHombre = "/images/men";
-        String archivoMujer = "/images/woman";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/seleccionarImagen.fxml"));
+        Parent root = loader.load();
 
-        switch (numeroImagen) {
-            //case 1, 2 ,3, 4, 5: No soportado
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-                imagenPerfil.setImage(new Image(new String(archivoHombre + numeroImagen + ".png")));
-                break;
-            //case 6, 7, 8, 9, 10, 11:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-                imagenPerfil.setImage(new Image(new String(archivoMujer + (numeroImagen - 5) + ".png")));
-                break;
-            case 12:
-                imagenPerfil.setImage(new Image("/images/greenball.png"));
-                break;
-            case 13:
-                imagenPerfil.setImage(new Image("/images/default.png"));
-                numeroImagen = 0;
-        }
+        // Obtener el controlador de la nueva ventana
+        SeleccionarImagenController controller = loader.getController();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Seleccionar imagen de perfil - Club de tenis GreenBall");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.getIcons().add(new Image("images/greenball.png"));
+        controller.setStage(stage);
+        
+        // Registrar el evento setOnHidden para capturar los datos al cerrar la ventana
+        stage.setOnHidden(e -> {
+            String imagen = controller.getImagen();
+            imagenPerfil.setImage(new Image("/images/" + imagen + ".png"));
+
+        });
+        
+        stage.showAndWait();
 
     }
 
@@ -296,7 +288,6 @@ public class RegistroSocioController implements Initializable {
             }, input_usuario.textProperty());
             errorUsuario.visibleProperty().bind(usuarioNoValido);
             flag = true;
-            System.out.println("PROP DE errorUsuario RESTAURADA");
         }
     }
 
