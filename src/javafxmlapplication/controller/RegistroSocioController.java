@@ -243,6 +243,8 @@ public class RegistroSocioController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
+        stage.setMinWidth(637);
+        stage.setMinHeight(476);
 
         stage.show();
 

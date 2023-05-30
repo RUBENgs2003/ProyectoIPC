@@ -87,6 +87,8 @@ public class InicioSesionController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
+        stage.setMinWidth(855);
+        stage.setMinHeight(682);
 
         stage.show();
 
@@ -126,7 +128,8 @@ public class InicioSesionController implements Initializable {
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.initOwner(currentStage);
                 stage.getIcons().add(new Image("images/greenball.png"));
-
+                stage.setMinWidth(758);
+                stage.setMinHeight(575);
                 stage.show();
                 
             }

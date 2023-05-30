@@ -178,8 +178,7 @@ public class ActualizarDatosController implements Initializable {
         input_tarjeta.setText(member.getCreditCard());
         input_telefono.setText(member.getTelephone());
         input_usuario.setText(member.getNickName());
-        //COMPLETAR - IMAGEN
-        //...
+        imagenPerfil.setImage(member.getImage());
     }
 
     @FXML
@@ -238,6 +237,8 @@ public class ActualizarDatosController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(currentStage);
             stage.getIcons().add(new Image("images/greenball.png"));
+            stage.setMinWidth(758);
+            stage.setMinHeight(575);
 
             stage.show();
         });
@@ -295,6 +296,8 @@ public class ActualizarDatosController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
+        stage.setMinWidth(758);
+        stage.setMinHeight(575);
 
         stage.show();
     }
