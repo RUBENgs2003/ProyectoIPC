@@ -139,6 +139,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button fx:id="vista_input_password" layoutX="259.0" layoutY="402.0" mnemonicParsing="false" onAction="#modificar_vista_input_password" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fx:id="ojo_vista" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/ojo_1.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <TextField fx:id="input_password_2" layoutX="50.0" layoutY="403.0" prefHeight="32.0" prefWidth="205.0" visible="false" />
          </children>
       </Pane>
    </center>

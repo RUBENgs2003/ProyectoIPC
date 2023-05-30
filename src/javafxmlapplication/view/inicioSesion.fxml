@@ -54,14 +54,6 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Label fx:id="label_passOlvidada" alignment="CENTER" layoutX="89.0" layoutY="373.0" prefHeight="22.0" prefWidth="175.0" styleClass="clickable-label" stylesheets="@../../css/styles.css" text="¿Has olvidado la contraseña?">
-               <font>
-                  <Font size="11.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
             <Button fx:id="btn_registro" layoutX="78.0" layoutY="401.0" mnemonicParsing="false" onAction="#cambiarARegistro" prefHeight="35.0" prefWidth="196.0" styleClass="button2" text="¿No estás registrado? Regístrate">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -84,6 +76,15 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+            <TextField fx:id="input_password_2" layoutX="72.0" layoutY="231.0" prefHeight="33.0" prefWidth="203.0" visible="false" />
+            <Button fx:id="vista_input_password" layoutX="279.0" layoutY="229.0" mnemonicParsing="false" onAction="#modificar_vista_input_password" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fx:id="ojo_vista" fitHeight="33.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/ojo_1.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </Pane>
    </center>

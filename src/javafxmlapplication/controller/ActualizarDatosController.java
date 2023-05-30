@@ -63,6 +63,7 @@ public class ActualizarDatosController implements Initializable {
     private TextField input_svc;
     @FXML
     private ImageView imagenPerfil;
+    private int numeroImagen = 1;
     @FXML
     private Label errorTelefono;
     @FXML
@@ -83,8 +84,13 @@ public class ActualizarDatosController implements Initializable {
     private Button btn_cancelar;
 
     private Member member;
+    @FXML
+    private Button vista_input_password;
+    @FXML
+    private TextField input_password_2;
+    @FXML
+    private ImageView ojo_vista;
 
-    private int numeroImagen = 1;
     /**
      * Initializes the controller class.
      */
@@ -124,6 +130,9 @@ public class ActualizarDatosController implements Initializable {
         // Crear binding para el label de error del campo "contrasena"
         BooleanBinding passwordNoValido = Bindings.createBooleanBinding(() -> input_password.getText().length() <= 6, input_password.textProperty());
         errorPassword.visibleProperty().bind(passwordNoValido);
+        
+        // Crear binding para mostrar la contraseña
+        input_password_2.textProperty().bindBidirectional(input_password.textProperty());
 
         // Crear bindings para el número de tarjeta de crédito y el código de seguridad SVC
         // Crear un binding para el número de tarjeta de crédito
@@ -188,6 +197,7 @@ public class ActualizarDatosController implements Initializable {
         member.setTelephone(input_telefono.getText());
         member.setSvc(svc);
         member.setSurname(input_apellidos.getText());
+        member.setImage(imagenPerfil.getImage());
 
         // Mostrar modal
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -288,5 +298,17 @@ public class ActualizarDatosController implements Initializable {
 
         stage.show();
     }
-
+    
+    @FXML
+    private void modificar_vista_input_password(ActionEvent event) {
+        if (input_password_2.isVisible()) {
+            ojo_vista.setImage(new Image("/images/ojo_1.png"));
+            input_password_2.setVisible(false);
+            input_password.setVisible(true);
+        } else {
+            ojo_vista.setImage(new Image("/images/ojo_2.png"));
+            input_password_2.setVisible(true);
+            input_password.setVisible(false);
+        }
+    }
 }

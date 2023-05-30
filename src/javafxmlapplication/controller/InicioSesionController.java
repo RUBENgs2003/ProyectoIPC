@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -49,6 +50,12 @@ public class InicioSesionController implements Initializable {
     private Label label_errorPassword;
     @FXML
     private Label label_errorUsuario;
+    @FXML
+    private TextField input_password_2;
+    @FXML
+    private Button vista_input_password;
+    @FXML
+    private ImageView ojo_vista;
 
     /**
      * Initializes the controller class.
@@ -60,6 +67,9 @@ public class InicioSesionController implements Initializable {
         btn_iniciarSesion.disableProperty().bind(
                 Bindings.or(Bindings.isEmpty(input_usuario.textProperty()), Bindings.isEmpty(input_password.textProperty()))
         );
+        
+        // Crear binding para mostrar la contraseña
+        input_password_2.textProperty().bindBidirectional(input_password.textProperty());
 
     }
 
@@ -122,6 +132,19 @@ public class InicioSesionController implements Initializable {
             }
         }
 
+    }
+    
+    @FXML
+    private void modificar_vista_input_password(ActionEvent event) {
+        if (input_password_2.isVisible()) {
+            ojo_vista.setImage(new Image("/images/ojo_1.png"));
+            input_password_2.setVisible(false);
+            input_password.setVisible(true);
+        } else {
+            ojo_vista.setImage(new Image("/images/ojo_2.png"));
+            input_password_2.setVisible(true);
+            input_password.setVisible(false);
+        }
     }
 
 }

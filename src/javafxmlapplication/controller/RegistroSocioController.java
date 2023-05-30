@@ -82,6 +82,12 @@ public class RegistroSocioController implements Initializable {
     @FXML
     private Label errorSVC;
     private boolean flag;
+    @FXML
+    private Button vista_input_password;
+    @FXML
+    private TextField input_password_2;
+    @FXML
+    private ImageView ojo_vista;
 
     /**
      * Initializes the controller class.
@@ -122,6 +128,9 @@ public class RegistroSocioController implements Initializable {
         // Crear binding para el label de error del campo "contrasena"
         BooleanBinding passwordNoValido = Bindings.createBooleanBinding(() -> input_password.getText().length() <= 6, input_password.textProperty());
         errorPassword.visibleProperty().bind(passwordNoValido);
+        
+        // Crear binding para mostrar la contraseña
+        input_password_2.textProperty().bindBidirectional(input_password.textProperty());
 
         // Crear bindings para el número de tarjeta de crédito y el código de seguridad SVC
         // Crear un binding para el número de tarjeta de crédito
@@ -285,6 +294,20 @@ public class RegistroSocioController implements Initializable {
             }, input_usuario.textProperty());
             errorUsuario.visibleProperty().bind(usuarioNoValido);
             flag = true;
+            System.out.println("PROP DE errorUsuario RESTAURADA");
+        }
+    }
+
+    @FXML
+    private void modificar_vista_input_password(ActionEvent event) {
+        if (input_password_2.isVisible()) {
+            ojo_vista.setImage(new Image("/images/ojo_1.png"));
+            input_password_2.setVisible(false);
+            input_password.setVisible(true);
+        } else {
+            ojo_vista.setImage(new Image("/images/ojo_2.png"));
+            input_password_2.setVisible(true);
+            input_password.setVisible(false);
         }
     }
 }

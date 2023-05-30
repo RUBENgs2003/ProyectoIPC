@@ -172,11 +172,11 @@ public class VerPistasAutenticadoController implements Initializable {
                     LocalTime time = getValue();
                     int minutes = steps * timeDuration;
                     if (time.minusMinutes(minutes).compareTo(minTime) >= 0) {
-                        setValue(time.minusMinutes(minutes));
+                        setValue(time.minusMinutes(minutes).withMinute(0));
                     } else {
                         Duration duration = Duration.between(minTime, time);
                         long minutesUntilMinTime = duration.toMinutes() % (maxTime.toSecondOfDay() / 60);
-                        setValue(maxTime.minusMinutes(minutesUntilMinTime));
+                        setValue(maxTime.minusMinutes(minutesUntilMinTime).withMinute(0));
                     }
                 }
 
@@ -185,11 +185,11 @@ public class VerPistasAutenticadoController implements Initializable {
                     LocalTime time = getValue();
                     int minutes = steps * timeDuration;
                     if (time.plusMinutes(minutes).compareTo(maxTime) <= 0) {
-                        setValue(time.plusMinutes(minutes));
+                        setValue(time.plusMinutes(minutes).withMinute(0));
                     } else {
                         Duration duration = Duration.between(time, maxTime);
                         long minutesUntilMaxTime = duration.toMinutes() % (maxTime.toSecondOfDay() / 60);
-                        setValue(minTime.plusMinutes(minutesUntilMaxTime));
+                        setValue(minTime.plusMinutes(minutesUntilMaxTime).withMinute(0));
                     }
                 }
 
