@@ -175,7 +175,6 @@ public class VerPistasAutenticadoController implements Initializable {
                 public void decrement(int steps) {
                     LocalTime time = getValue().withNano(0);
                     int minutes = steps * timeDuration;
-                    System.out.println(time.toString() + " == " + minTime.toString() + " ? " + time.compareTo(minTime));
                     if (time.compareTo(minTime) <= 0) {
                         setValue(maxTime);
                     } else {
@@ -187,7 +186,6 @@ public class VerPistasAutenticadoController implements Initializable {
                 public void increment(int steps) {
                     LocalTime time = getValue().withNano(0);
                     int minutes = steps * timeDuration;
-                    System.out.println(time.toString() + " == " + minTime.toString() + " ? " + time.compareTo(minTime));
                     if (time.compareTo(maxTime) >= 0) {
                         setValue(minTime);
                     } else {
