@@ -140,27 +140,25 @@ public class VerPistasController implements Initializable {
 
                 @Override
                 public void decrement(int steps) {
-                    LocalTime time = getValue();
+                    LocalTime time = getValue().withNano(0);
                     int minutes = steps * timeDuration;
-                    if (time.minusMinutes(minutes).compareTo(minTime) >= 0) {
-                        setValue(time.minusMinutes(minutes));
+                    System.out.println(time.toString() + " == " + minTime.toString() + " ? " + time.compareTo(minTime));
+                    if (time.compareTo(minTime) <= 0) {
+                        setValue(maxTime);
                     } else {
-                        Duration duration = Duration.between(minTime, time);
-                        long minutesUntilMinTime = duration.toMinutes() % (maxTime.toSecondOfDay() / 60);
-                        setValue(maxTime.minusMinutes(minutesUntilMinTime));
+                        setValue(time.minusMinutes(minutes));
                     }
                 }
 
                 @Override
                 public void increment(int steps) {
-                    LocalTime time = getValue();
+                    LocalTime time = getValue().withNano(0);
                     int minutes = steps * timeDuration;
-                    if (time.plusMinutes(minutes).compareTo(maxTime) <= 0) {
-                        setValue(time.plusMinutes(minutes));
+                    System.out.println(time.toString() + " == " + minTime.toString() + " ? " + time.compareTo(minTime));
+                    if (time.compareTo(maxTime) >= 0) {
+                        setValue(minTime);
                     } else {
-                        Duration duration = Duration.between(time, maxTime);
-                        long minutesUntilMaxTime = duration.toMinutes() % (maxTime.toSecondOfDay() / 60);
-                        setValue(minTime.plusMinutes(minutesUntilMaxTime));
+                        setValue(time.plusMinutes(minutes));
                     }
                 }
 
