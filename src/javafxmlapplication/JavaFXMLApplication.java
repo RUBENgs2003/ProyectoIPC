@@ -34,6 +34,8 @@ public class JavaFXMLApplication extends Application {
         stage.setScene(scene);
         stage.setTitle("Disponibilidad de las pistas - Club de Tenis GreenBall");
         stage.getIcons().add(new Image("images/greenball.png"));
+        stage.setMinWidth(758);
+        stage.setMinHeight(575);
         stage.show();
     } 
 

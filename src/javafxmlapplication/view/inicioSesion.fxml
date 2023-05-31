@@ -54,7 +54,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button fx:id="btn_registro" layoutX="78.0" layoutY="401.0" mnemonicParsing="false" onAction="#cambiarARegistro" prefHeight="35.0" prefWidth="196.0" styleClass="button2" text="¿No estás registrado? Regístrate">
+            <Button fx:id="btn_registro" layoutX="43.0" layoutY="401.0" mnemonicParsing="false" onAction="#cambiarARegistro" prefHeight="35.0" prefWidth="196.0" styleClass="button2" text="¿No estás registrado? Regístrate">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -85,6 +85,11 @@
                      </image>
                   </ImageView>
                </graphic></Button>
+            <Button fx:id="btn_volver" layoutX="263.0" layoutY="403.0" mnemonicParsing="false" onAction="#volver" prefHeight="32.0" prefWidth="51.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Volver">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </Pane>
    </center>

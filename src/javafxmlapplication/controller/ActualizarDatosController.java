@@ -157,7 +157,6 @@ public class ActualizarDatosController implements Initializable {
         errorSVC.visibleProperty().bind(codigoNoValido);
 
         //si todos los campos son validos -> registrarse
-        //COMPLETAR
         // Crear un binding que dependa de todos los bindings anteriores
         BooleanBinding datosValidos = Bindings.or(nombreNoValido, apellidosNoValidos)
                 .or(telefonoNoValido).or(passwordNoValido).or(usuarioNoValido).or(numeroNoValido).or(codigoNoValido);
@@ -189,8 +188,6 @@ public class ActualizarDatosController implements Initializable {
 
         member.setCreditCard(input_tarjeta.getText());
 
-        //COMPLETAR - CAMBIAR IMAGEN
-        //member.setImage(image); ...
         member.setName(input_nombre.getText());
         member.setPassword(input_password.getText());
         member.setTelephone(input_telefono.getText());
@@ -260,10 +257,13 @@ public class ActualizarDatosController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.getIcons().add(new Image("images/greenball.png"));
         controller.setStage(stage);
+        stage.setMinWidth(655);
+        stage.setMinHeight(344);
 
         // Registrar el evento setOnHidden para capturar los datos al cerrar la ventana
         stage.setOnHidden(e -> {
             String imagen = controller.getImagen();
+            if(imagen.equals("default")) return;
             imagenPerfil.setImage(new Image("/images/" + imagen + ".png"));
 
         });

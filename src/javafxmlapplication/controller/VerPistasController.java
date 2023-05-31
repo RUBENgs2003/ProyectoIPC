@@ -40,6 +40,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -88,6 +90,26 @@ public class VerPistasController implements Initializable {
     private ImageView img_pista5;
 
     Map<String, Pista> pistaMap = new HashMap<>();
+    @FXML
+    private Button btn_registrarse;
+    @FXML
+    private Button btn_iniciarSesion;
+    @FXML
+    private GridPane gridPane;
+    @FXML
+    private HBox gridPaneHbox;
+    @FXML
+    private Button btn_pista1;
+    @FXML
+    private Button btn_pista2;
+    @FXML
+    private Button btn_pista3;
+    @FXML
+    private Button btn_pista4;
+    @FXML
+    private Button btn_pista5;
+    @FXML
+    private Button btn_pista6;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -227,6 +249,8 @@ public class VerPistasController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
+        stage.setMinWidth(637);
+        stage.setMinHeight(476);
 
         stage.show();
 
@@ -246,6 +270,8 @@ public class VerPistasController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
+        stage.setMinWidth(855);
+        stage.setMinHeight(702);
 
         stage.show();
 

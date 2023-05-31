@@ -39,8 +39,6 @@ public class InicioSesionController implements Initializable {
     @FXML
     private Button btn_registro;
     @FXML
-    private Label label_passOlvidada;
-    @FXML
     private TextField input_usuario;
     @FXML
     private TextField input_password;
@@ -56,6 +54,8 @@ public class InicioSesionController implements Initializable {
     private Button vista_input_password;
     @FXML
     private ImageView ojo_vista;
+    @FXML
+    private Button btn_volver;
 
     /**
      * Initializes the controller class.
@@ -88,7 +88,7 @@ public class InicioSesionController implements Initializable {
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
         stage.setMinWidth(855);
-        stage.setMinHeight(682);
+        stage.setMinHeight(702);
 
         stage.show();
 
@@ -148,6 +148,27 @@ public class InicioSesionController implements Initializable {
             input_password_2.setVisible(true);
             input_password.setVisible(false);
         }
+    }
+
+    @FXML
+    private void volver(ActionEvent event) throws IOException {
+        //volver atras - ventana principal
+        Stage currentStage = (Stage) btn_volver.getScene().getWindow();
+        currentStage.close();
+
+        FXMLLoader miCargador = new FXMLLoader(getClass().getResource("../view/verPistas.fxml"));
+        Parent root = miCargador.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Ver pistas - Club de tenis GreenBall");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(currentStage);
+        stage.getIcons().add(new Image("images/greenball.png"));
+        stage.setMinWidth(758);
+        stage.setMinHeight(575);
+
+        stage.show();
     }
 
 }

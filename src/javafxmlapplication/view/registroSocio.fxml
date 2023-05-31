@@ -88,7 +88,7 @@
                   <Image url="@../../images/default.png" />
                </image>
             </ImageView>
-            <Button fx:id="btn_registrarse" layoutX="54.0" layoutY="598.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="32.0" prefWidth="441.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Registrarse">
+            <Button fx:id="btn_registrarse" layoutX="18.0" layoutY="598.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="32.0" prefWidth="413.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Registrarse">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -151,6 +151,11 @@
                   </ImageView>
                </graphic></Button>
             <TextField fx:id="input_password_2" layoutX="50.0" layoutY="404.0" prefHeight="32.0" prefWidth="205.0" visible="false" />
+            <Button fx:id="btn_volver" layoutX="442.0" layoutY="598.0" mnemonicParsing="false" onAction="#volver" prefHeight="32.0" prefWidth="56.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Volver">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </Pane>
    </center>
