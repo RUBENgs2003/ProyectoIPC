@@ -38,54 +38,60 @@
    <center>
       <Pane prefHeight="518.0" prefWidth="372.0">
          <children>
-            <Label layoutX="62.0" layoutY="42.0" text="Iniciar sesión">
+            <Label layoutX="95.0" layoutY="77.0" text="Iniciar sesión">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
-            <Label layoutX="71.0" layoutY="119.0" text="Usuario">
+            <Label layoutX="74.0" layoutY="137.0" text="Usuario">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="input_usuario" layoutX="72.0" layoutY="143.0" prefHeight="33.0" prefWidth="205.0" promptText="Usuario" />
-            <PasswordField fx:id="input_password" layoutX="71.0" layoutY="231.0" prefHeight="33.0" prefWidth="205.0" promptText="Contraseña" text="" />
-            <Button fx:id="btn_iniciarSesion" layoutX="184.0" layoutY="306.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="32.0" prefWidth="90.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Iniciar Sesión">
+            <TextField fx:id="input_usuario" layoutX="75.0" layoutY="161.0" prefHeight="33.0" prefWidth="207.0" promptText="Usuario" />
+            <PasswordField fx:id="input_password" layoutX="74.0" layoutY="249.0" prefHeight="33.0" prefWidth="208.0" promptText="Contraseña" text="" />
+            <Button fx:id="btn_iniciarSesion" layoutX="191.0" layoutY="314.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="32.0" prefWidth="90.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Iniciar Sesión">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button fx:id="btn_registro" layoutX="43.0" layoutY="401.0" mnemonicParsing="false" onAction="#cambiarARegistro" prefHeight="35.0" prefWidth="196.0" styleClass="button2" text="¿No estás registrado? Regístrate">
+            <Button fx:id="btn_registro" layoutX="75.0" layoutY="389.0" mnemonicParsing="false" onAction="#cambiarARegistro" prefHeight="35.0" prefWidth="206.0" styleClass="button2" text="¿No estás registrado? Regístrate">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <stylesheets>
                   <URL value="@../../css/styles.css" />
                </stylesheets></Button>
-            <Label layoutX="70.0" layoutY="207.0" text="Contraseña">
+            <Label layoutX="73.0" layoutY="225.0" text="Contraseña">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="label_errorPassword" layoutX="72.0" layoutY="269.0" prefHeight="17.0" prefWidth="203.0" text="Contraseña incorrecta" textFill="#ff0202" visible="false">
+            <Label fx:id="label_errorPassword" layoutX="75.0" layoutY="287.0" prefHeight="17.0" prefWidth="203.0" text="Contraseña incorrecta" textFill="#ff0202" visible="false">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="label_errorUsuario" layoutX="70.0" layoutY="179.0" prefHeight="17.0" prefWidth="203.0" text="El usuario no existe" textFill="#ff0202" visible="false">
+            <Label fx:id="label_errorUsuario" layoutX="73.0" layoutY="197.0" prefHeight="17.0" prefWidth="203.0" text="El usuario no existe" textFill="#ff0202" visible="false">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="input_password_2" layoutX="72.0" layoutY="231.0" prefHeight="33.0" prefWidth="203.0" visible="false" />
-            <Button fx:id="vista_input_password" layoutX="279.0" layoutY="229.0" mnemonicParsing="false" onAction="#modificar_vista_input_password" textAlignment="CENTER">
+            <TextField fx:id="input_password_2" layoutX="75.0" layoutY="249.0" prefHeight="33.0" prefWidth="207.0" promptText="Contraseña" visible="false" />
+            <Button fx:id="vista_input_password" layoutX="250.0" layoutY="256.0" mnemonicParsing="false" onAction="#modificar_vista_input_password" prefHeight="16.0" prefWidth="11.0" styleClass="buttonWithoutStyles" stylesheets="@../../css/styles.css" textAlignment="CENTER">
                <graphic>
-                  <ImageView fx:id="ojo_vista" fitHeight="33.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="ojo_vista" fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/ojo_1.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
-               </graphic></Button>
-            <Button fx:id="btn_volver" layoutX="263.0" layoutY="403.0" mnemonicParsing="false" onAction="#volver" prefHeight="32.0" prefWidth="51.0" styleClass="button1" stylesheets="@../../css/styles.css" text="Volver">
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button fx:id="btn_volver" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#volver" prefHeight="21.0" prefWidth="62.0" styleClass="button1" stylesheets="@../../css/styles.css" text="&lt; Volver">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

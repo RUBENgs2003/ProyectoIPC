@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="521.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.VerReservasController">
     <top>
@@ -39,18 +41,28 @@
     <bottom>
         <ToolBar prefHeight="40.0" prefWidth="40.0" BorderPane.alignment="CENTER">
             <items>
-                <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                    <children>
-                        <Button fx:id="btn_volver" alignment="CENTER" mnemonicParsing="false" onAction="#volver" styleClass="button2" stylesheets="@../../css/styles.css" text="Volver" />
-                        <Region prefHeight="30.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#cancelar" styleClass="button1" stylesheets="@../../css/styles.css" text="Cancelar reserva" />
-                    </children>
-                </HBox>
+            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+               <children>
+                      <HBox alignment="CENTER">
+                          <children>
+                              <Button fx:id="btn_volver" alignment="CENTER" mnemonicParsing="false" onAction="#volver" styleClass="button2" stylesheets="@../../css/styles.css" text="Volver" />
+                              <Region prefHeight="32.0" prefWidth="190.0" HBox.hgrow="ALWAYS" />
+                        <Label text="Mostrando las 10 últimas reservas">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Region prefHeight="32.0" prefWidth="170.0" />
+                              <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#cancelar" styleClass="button1" stylesheets="@../../css/styles.css" text="Cancelar reserva" />
+                          </children>
+                      </HBox>
+               </children>
+            </VBox>
             </items>
         </ToolBar>
     </bottom>
     <center>
-        <TableView fx:id="tableView" prefHeight="421.0" prefWidth="738.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableView" prefHeight="443.0" prefWidth="738.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="col_nombrePista" prefWidth="169.59998166561127" text="Nombre de la pista" />
                 <TableColumn fx:id="col_fechaHoraEntrada" prefWidth="170.4000244140625" text="Fecha y Hora de entrada" />

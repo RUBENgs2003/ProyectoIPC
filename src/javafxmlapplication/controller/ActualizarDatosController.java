@@ -32,6 +32,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
@@ -90,6 +95,10 @@ public class ActualizarDatosController implements Initializable {
     private TextField input_password_2;
     @FXML
     private ImageView ojo_vista;
+    @FXML
+    private BorderPane borderPane;
+    @FXML
+    private Pane leftPane;
 
     /**
      * Initializes the controller class.
@@ -263,7 +272,9 @@ public class ActualizarDatosController implements Initializable {
         // Registrar el evento setOnHidden para capturar los datos al cerrar la ventana
         stage.setOnHidden(e -> {
             String imagen = controller.getImagen();
-            if(imagen.equals("default")) return;
+            if (imagen.equals("default")) {
+                return;
+            }
             imagenPerfil.setImage(new Image("/images/" + imagen + ".png"));
 
         });
