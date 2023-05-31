@@ -116,7 +116,7 @@ public class RegistroSocioController implements Initializable {
         // Crear binding para el label de error del campo "usuario"
         BooleanBinding usuarioNoValido = Bindings.createBooleanBinding(() -> {
             String usuario = input_usuario.getText();
-            return usuario.isEmpty();
+            return usuario.isEmpty() || usuario.matches(".*\\s+.*");
         }, input_usuario.textProperty());
         errorUsuario.visibleProperty().bind(usuarioNoValido);
 
@@ -277,11 +277,11 @@ public class RegistroSocioController implements Initializable {
     @FXML
     private void escribe_usuario(MouseEvent event) {
         if (!flag) {
-            errorUsuario.setText("Introduce un nombre de usuario");
+            errorUsuario.setText("Introduce un nombre de usuario válido");
             // Crear binding para el label de error del campo "usuario"
             BooleanBinding usuarioNoValido = Bindings.createBooleanBinding(() -> {
                 String usuario = input_usuario.getText();
-                return usuario.isEmpty();
+                return usuario.isEmpty() || usuario.matches(".*\\s+.*");
             }, input_usuario.textProperty());
             errorUsuario.visibleProperty().bind(usuarioNoValido);
             flag = true;
