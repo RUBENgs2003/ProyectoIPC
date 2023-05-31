@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.value.ObservableValue;
@@ -32,6 +33,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -124,6 +126,7 @@ public class VerPistasAutenticadoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         fondo.setMinWidth(738);
         fondo.setMinHeight(535);
         try {
@@ -345,6 +348,7 @@ public class VerPistasAutenticadoController implements Initializable {
     @FXML
     private void reservarPista(ActionEvent event) throws ClubDAOException, IOException {
 
+        Club club = Club.getInstance();
         Button btn = (Button) event.getSource();
         String txtPagado = "";
         Boolean pistaLibre = true;
@@ -379,6 +383,77 @@ public class VerPistasAutenticadoController implements Initializable {
         }
 
         if (pistaLibre) {
+
+            //comprobar si ya tiene dos horas seguidas reservadas o si reservar esta implica tener más de dos horas reservadas
+            club = Club.getInstance();
+
+            List<Booking> userBookings = club.getUserBookings(member.getNickName());
+
+            //filtrado para que solo salgan las reservas del mismo dia
+            userBookings = userBookings.stream()
+                    .filter(booking -> fechaSeleccionada.equals(booking.getMadeForDay()))
+                    .collect(Collectors.toList());
+
+            int horasConsecutivasAnteriores = 1;
+            int horasConsecutivasPosteriores = 1;
+            boolean limiteHorasExcedido = false;
+            String horaSeleccionada = spinner.getValue().format(DateTimeFormatter.ofPattern("HH:mm"));
+
+            //comprobar las horas anteriores
+            for (int i = 0; i < userBookings.size(); i++) {
+
+                Booking currentBooking = userBookings.get(i);
+                String horaCurrentBooking = currentBooking.getFromTime().minusMinutes(club.getBookingDuration() * horasConsecutivasAnteriores).format(DateTimeFormatter.ofPattern("HH:mm"));
+                // Verifica si las reservas son consecutivas y de la misma pista
+
+                if (pistaSeleccionada.getName().equals(currentBooking.getCourt().getName())
+                        && horaSeleccionada.equals(horaCurrentBooking)) {
+                    horasConsecutivasAnteriores += club.getBookingDuration() / 60;
+                    i = -1;
+                }
+
+                // Verifica si el usuario ha hecho más de dos reservas consecutivas
+                if (horasConsecutivasAnteriores > 2) {
+                    limiteHorasExcedido = true;
+                    break;
+                }
+            }
+                        
+            //comprobar las horas posteriores
+            for (int i = 0; i < userBookings.size(); i++) {
+
+                Booking currentBooking = userBookings.get(i);
+                String horaCurrentBooking = currentBooking.getFromTime().plusMinutes(club.getBookingDuration() * horasConsecutivasPosteriores).format(DateTimeFormatter.ofPattern("HH:mm"));
+                // Verifica si las reservas son consecutivas y de la misma pista
+
+                if (pistaSeleccionada.getName().equals(currentBooking.getCourt().getName())
+                        && horaSeleccionada.equals(horaCurrentBooking)) {
+                    horasConsecutivasPosteriores += club.getBookingDuration() / 60;
+                    i = -1;
+                    System.out.println(horasConsecutivasPosteriores);
+                }
+
+                // Verifica si el usuario ha hecho más de dos reservas consecutivas
+                if (horasConsecutivasPosteriores > 2) {
+                    limiteHorasExcedido = true;
+                    break;
+                }
+            }
+            
+            //si la pista está reservada en la hora anterior y en la posterior -> habría 3 horas reservadas
+            if(horasConsecutivasAnteriores == 2 && 2 == horasConsecutivasPosteriores) limiteHorasExcedido = true;
+
+            if (limiteHorasExcedido) {
+                Alert alertLimiteHorasExcedido = new Alert(Alert.AlertType.ERROR);
+                alertLimiteHorasExcedido.setTitle("Error al realizar la reserva");
+                alertLimiteHorasExcedido.setHeaderText("Error al realizar la reserva");
+                alertLimiteHorasExcedido.setContentText("No es posible realizar esta reserva.\nSolo puede reservar la misma pista un máximo de 2 horas consecutivas.");
+                DialogPane dialogPane = alertLimiteHorasExcedido.getDialogPane();
+                dialogPane.setPrefWidth(400);
+                dialogPane.setPrefHeight(200);
+                alertLimiteHorasExcedido.showAndWait();
+                return;
+            }
 
             // Obtener los datos de la reserva
             String pista = pistaSeleccionada.getName();
@@ -537,6 +612,7 @@ public class VerPistasAutenticadoController implements Initializable {
         stage.setMinHeight(555);
 
         stage.show();
+
     }
 
     //clase auxiliar
