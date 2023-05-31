@@ -1,28 +1,13 @@
 package javafxmlapplication.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Callback;
-
 import java.io.File;
-import java.io.IOException;
 
 public class SeleccionarImagenController {
-
-    private ListView<File> imageListView;
-
-    private File selectedImage;
 
     private Stage stage;
     @FXML
@@ -65,6 +50,7 @@ public class SeleccionarImagenController {
 
     public void setStage(Stage stage) {
         this.seleccionarImagenStage = stage;
+        seleccionarImagenStage.setResizable(false);
     }
 
     String getImagen() {
@@ -80,7 +66,7 @@ public class SeleccionarImagenController {
             lastButtonSelected.getStyleClass().add("button");
             lastButtonSelected = btn;
         }
-        btn.getStyleClass().add("button3");
+        btn.getStyleClass().add("button1");
         imagen = btn.getId();
         btn_aceptar.disableProperty().setValue(Boolean.FALSE);
     }
