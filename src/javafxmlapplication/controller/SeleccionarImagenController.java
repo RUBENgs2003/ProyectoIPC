@@ -3,9 +3,7 @@ package javafxmlapplication.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import java.io.File;
 
 public class SeleccionarImagenController {
 
@@ -34,6 +32,10 @@ public class SeleccionarImagenController {
     private Button woman4;
     @FXML
     private Button btn_aceptar;
+    @FXML
+    private Button raqueta;
+    @FXML
+    private Button none;
 
     private String imagen = "default";
     private Stage seleccionarImagenStage;

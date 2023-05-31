@@ -7,8 +7,11 @@ package javafxmlapplication.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Club;
@@ -66,6 +71,22 @@ public class InicioSesionController implements Initializable {
         
         // Crear binding para mostrar la contraseña
         input_password_2.textProperty().bindBidirectional(input_password.textProperty());
+        
+        // Crear un controlador de evento
+        EventHandler<KeyEvent> enterEventHandler = (KeyEvent event) -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    iniciarSesion();
+                } catch (ClubDAOException ex) {
+                    Logger.getLogger(InicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(InicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        
+        input_password.setOnKeyPressed(enterEventHandler);
+        input_password_2.setOnKeyPressed(enterEventHandler);
 
     }
 
@@ -91,7 +112,7 @@ public class InicioSesionController implements Initializable {
     }
 
     @FXML
-    private void iniciarSesion(ActionEvent event) throws ClubDAOException, IOException {
+    private void iniciarSesion() throws ClubDAOException, IOException {
 
         //por defecto
         label_errorPassword.visibleProperty().setValue(false);
