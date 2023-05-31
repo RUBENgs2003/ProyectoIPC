@@ -87,8 +87,8 @@ public class InicioSesionController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(855);
-        stage.setMinHeight(702);
+        // Deshabilitar la función redimensionar la ventana
+        stage.setResizable(false);
 
         stage.show();
 
@@ -128,8 +128,9 @@ public class InicioSesionController implements Initializable {
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.initOwner(currentStage);
                 stage.getIcons().add(new Image("images/greenball.png"));
-                stage.setMinWidth(758);
-                stage.setMinHeight(575);
+                // Con root.prefWidth(-1) obtenemos el width predefinido
+                stage.setMinWidth(root.prefWidth(-1) + 20);
+                stage.setMinHeight(root.prefHeight(-1) + 40);
                 stage.show();
                 
             }
@@ -165,8 +166,9 @@ public class InicioSesionController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(758);
-        stage.setMinHeight(575);
+        // Con root.prefWidth(-1) obtenemos el width predefinido
+        stage.setMinWidth(root.prefWidth(-1) + 20);
+        stage.setMinHeight(root.prefHeight(-1) + 40);
 
         stage.show();
     }

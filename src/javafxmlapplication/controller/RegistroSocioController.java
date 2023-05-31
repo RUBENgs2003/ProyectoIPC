@@ -245,8 +245,8 @@ public class RegistroSocioController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(637);
-        stage.setMinHeight(476);
+        // Deshabilitar la función redimensionar la ventana
+        stage.setResizable(false);
 
         stage.show();
 
@@ -323,8 +323,9 @@ public class RegistroSocioController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(758);
-        stage.setMinHeight(575);
+        // Con root.prefWidth(-1) obtenemos el width predefinido
+        stage.setMinWidth(root.prefWidth(-1) + 20);
+        stage.setMinHeight(root.prefHeight(-1) + 40);
 
         stage.show();
     }

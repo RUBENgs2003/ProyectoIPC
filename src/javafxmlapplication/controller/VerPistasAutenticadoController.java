@@ -127,8 +127,8 @@ public class VerPistasAutenticadoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        fondo.setMinWidth(738);
-        fondo.setMinHeight(535);
+        //fondo.setMinWidth(738);
+        //fondo.setMinHeight(535);
         try {
 
             Club club = Club.getInstance();
@@ -338,8 +338,9 @@ public class VerPistasAutenticadoController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(758);
-        stage.setMinHeight(555);
+        // Con root.prefWidth(-1) obtenemos el width predefinido
+        stage.setMinWidth(root.prefWidth(-1) + 20);
+        stage.setMinHeight(root.prefHeight(-1) + 40);
 
         stage.show();
 
@@ -581,8 +582,9 @@ public class VerPistasAutenticadoController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(855);
-        stage.setMinHeight(682);
+        // Con root.prefWidth(-1) obtenemos el width predefinido
+        stage.setMinWidth(root.prefWidth(-1) + 20);
+        stage.setMinHeight(root.prefHeight(-1) + 40);
 
         stage.show();
     }
@@ -608,8 +610,9 @@ public class VerPistasAutenticadoController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(758);
-        stage.setMinHeight(555);
+        // Con root.prefWidth(-1) obtenemos el width predefinido
+        stage.setMinWidth(root.prefWidth(-1) + 20);
+        stage.setMinHeight(root.prefHeight(-1) + 40);
 
         stage.show();
 

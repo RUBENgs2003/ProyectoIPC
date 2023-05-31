@@ -188,8 +188,9 @@ public class VerReservasController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(758);
-        stage.setMinHeight(555);
+        // Con root.prefWidth(-1) obtenemos el width predefinido
+        stage.setMinWidth(root.prefWidth(-1) + 20);
+        stage.setMinHeight(root.prefHeight(-1) + 40);
 
         stage.show();
     }

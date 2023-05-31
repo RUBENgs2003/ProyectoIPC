@@ -46,6 +46,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import model.Booking;
 import model.Club;
@@ -249,8 +250,9 @@ public class VerPistasController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(637);
-        stage.setMinHeight(476);
+        
+        // Deshabilitar la función redimensionar la ventana
+        stage.setResizable(false);
 
         stage.show();
 
@@ -270,8 +272,8 @@ public class VerPistasController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(currentStage);
         stage.getIcons().add(new Image("images/greenball.png"));
-        stage.setMinWidth(855);
-        stage.setMinHeight(702);
+        // Deshabilitar la función redimensionar la ventana
+        stage.setResizable(false);
 
         stage.show();
 
